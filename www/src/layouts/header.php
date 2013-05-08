@@ -1,6 +1,3 @@
-<?php
-require_once SESION;
-?>
 <!doctype html>
 <html lang="<?php echo IDIOMA; ?>">
 	<head>
@@ -11,6 +8,10 @@ require_once SESION;
 		<meta name="copyright" content="" />
 		<link rel="stylesheet" type="text/css" href="<?php echo KICKSTART_CSS; ?>" media="all" />                  <!-- KICKSTART -->		
 		<link rel="stylesheet" type="text/css" href="<?php echo STYLE_CSS; ?>" media="all" />                          <!-- CUSTOM STYLES -->
+		<style>
+			button { float: right;}
+		</style>
+
 		<script type="text/javascript" src="<?php echo JQUERY; ?>"></script>
 		<script type="text/javascript" src="<?php echo KICKSTART_JS; ?>"></script> 	
 	</head>
@@ -32,7 +33,7 @@ if (Sesion::existe('login')) {
 } else {
 ?>
 		<li class="current"><a href="<?php echo ROOT_HTML; ?>"><i class="icon-search"></i>Buscar Libro</a></li>
-		<li><a href="<?php echo $ingresar; ?>"><i class="icon-signin"></i>Ingresar</a></li>
+		<li><a href="<?php echo FORMS_HTML; ?>/login.php"><i class="icon-signin"></i>Ingresar</a></li>
 		<li><a href="<?php echo $salir; ?>"><i class="icon-question-sign"></i>Estado Estudiante</a></li>
 		<li><a href="<?php echo ACERCA_HTML; ?>"><i class="icon-info-sign"></i>Acerca</a></li>
 	</ul>

@@ -18,7 +18,7 @@ if (Sesion::existe('login')) {
 		<input type="text" name="usuario" id="usuario_id" placeholder="Ingrese el usuario">
 		<label for="usuario">Password: </label>
 		<input type="password" name="password" id="password_id">
-		<button type="submit" style="float:right;">Entrar</button>
+		<button type="submit">Entrar</button>
 	</div>
 	<div class="col_4"></div>
 </form>	

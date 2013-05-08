@@ -1,6 +1,5 @@
 <?php
 require_once 'variables.php';
-
 class Conexion
 {
     private $conexion;
@@ -11,7 +10,7 @@ class Conexion
     private $ultimoError;
     private $bdSeleccionada;
 
-    public function __construct() {
+    public function __construct($database) {
         $this->usuario  = $database['usuario'];
         $this->password = $database['password'];
         $this->bd       = $database['db'];
@@ -223,4 +222,6 @@ class Conexion
     }
 
 }
+
+
 ?>

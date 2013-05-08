@@ -24,13 +24,12 @@ class Sesion {
         return $this->valor;
     }
 
-    public function eliminar($id) {
-        if($this->existe($id))
+    public static function eliminar($id) {
+        if(Sesion::existe($id))
         {
-            $this->valor = $_SESSION[$id] = NULL;
+            $_SESSION[$id] = NULL;
             unset ( $_SESSION[$id]);
         }
-        return $this->valor;
     }
 
     public static function existe($id)
@@ -39,20 +38,18 @@ class Sesion {
     }
 
     public static function getValor($id) {
-        $this->existe(id) ? ($this->valor = $_SESSION[$this->id]) : $this->valor = NULL;
-        return $this->valor;
+        return Sesion::existe($id) ? $_SESSION[$id] : NULL;
     }
 
     public static function setValor($id, $valor) {
-        $this->existe($id) ? ($this->valor = $_SESSION[$id] = $valor) : ($this->valor = $_SESSION[$id] = NULL);
-        return $this->valor;
+        $_SESSION[$id] = $valor;
     }
 
-    public static function iniciarSession() {
+    public static function iniciarSesion() {
         return session_start();
     }
 
-    public function destruirSession() {
+    public function destruirSesion() {
         return session_destroy();
     }
 }

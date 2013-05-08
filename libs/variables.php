@@ -6,6 +6,7 @@ define('WWW', ROOT.DS.'www');
 define('SRC', WWW.DS.'src');
 define('FORMS', SRC.DS.'forms');
 define('LAYOUTS', SRC.DS.'layouts');
+define('VISTAS', SRC.DS.'vistas');
 define('ERROR_LY', LAYOUTS.DS.'error.php');
 define('MAIN_LY', LAYOUTS.DS.'main.php');
 define('HEADER_LY', LAYOUTS.DS.'header.php');
@@ -21,7 +22,7 @@ define('VARIABLES', LIBS.DS.'variables.php');
 //Detalles aplicacion
 define('TITULO', 'Administración Bibliotecaria');
 define('IDIOMA', 'es');
-define('AUTOR', 'Paúl Lenyn Cuao Alcántara');
+define('AUTOR', '');
 
 
 //Para enlaces y recursos del lado cliente
@@ -37,12 +38,18 @@ define('SRC_HTML', ROOT_HTML.'/src');
 define('LAYOUTS_HTML', SRC_HTML.'/layouts');
 define('CONTROL_HTML', SRC_HTML.'/control');
 define('FORMS_HTML', SRC_HTML.'/forms');
+define('VISTAS_HTML', SRC_HTML.'/vistas');
 define('ACERCA_HTML', LAYOUTS_HTML.'/acerca.php');
+
+//Mensajes de error
+$warnings = [
+	'VACIO' => ['titulo' => 'Sin coincidencias', 'descripcion' => '¡La búsqueda no tuvo resultados!']
+];
 
 
 //Variables
 $database = [
-	'usuario' => 'nightzpy',
+	'usuario' => 'root',
 	'password' => '18990567',
 	'host' => 'localhost',
 	'db' => 'biblioteca'

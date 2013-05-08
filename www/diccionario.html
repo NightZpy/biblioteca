@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>DBdoc</title> 
+</head> 
+<style type="text/css"> 
+  table {width: 100%; border-collapse: collapse;} 
+  table, td, th {border: 1px solid black;} 
+</style> 
+<body> 
+<h1>biblioteca</h1> 
+
+
+<h2>carreras</h2> 
+<p></p> 
+<table> 
+<tr> 
+<th>CAMPO</th> 
+<th>TIPO</th> 
+<th>NULO</th> 
+<th>EXTRA</th> 
+<th>COMENTARIOS</th> 
+</tr> 
+<tr> 
+   <td>id</td> 
+   <td>INT(10)</td> 
+    <td>NO</td> 
+    <td>AUTO_INCREMENT</td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>nombre</td> 
+   <td>VARCHAR(60)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Nombre de la carrera</td> 
+</tr> 
+</table> 
+ 
+
+<h2>categorias</h2> 
+<p></p> 
+<table> 
+<tr> 
+<th>CAMPO</th> 
+<th>TIPO</th> 
+<th>NULO</th> 
+<th>EXTRA</th> 
+<th>COMENTARIOS</th> 
+</tr> 
+<tr> 
+   <td>id</td> 
+   <td>INT(10)</td> 
+    <td>NO</td> 
+    <td>AUTO_INCREMENT</td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>nombre</td> 
+   <td>VARCHAR(100)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Nombre para la categoria de los libros</td> 
+</tr> 
+<tr> 
+   <td>descripcion</td> 
+   <td>TEXT</td> 
+    <td>SI</td> 
+    <td> - </td> 
+    <td>Descripción más detallada sobre dicha categoría</td> 
+</tr> 
+</table> 
+ 
+ 
+<h2>estudiantes</h2> 
+<p></p> 
+<table> 
+<tr> 
+<th>CAMPO</th> 
+<th>TIPO</th> 
+<th>NULO</th> 
+<th>EXTRA</th> 
+<th>COMENTARIOS</th> 
+</tr> 
+<tr> 
+   <td>id</td> 
+   <td>INT(10)</td> 
+    <td>NO</td> 
+    <td>AUTO_INCREMENT</td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>codigo</td> 
+   <td>VARCHAR(100)</td> 
+    <td>SI</td> 
+    <td> - </td> 
+    <td>Código del estudiante dentro de la institución</td> 
+</tr> 
+<tr> 
+   <td>nombres</td> 
+   <td>VARCHAR(50)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>apellidos</td> 
+   <td>VARCHAR(50)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>cedula</td> 
+   <td>VARCHAR(10)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>nacionalidad</td> 
+   <td>CHAR(1)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>V ó E</td> 
+</tr> 
+<tr> 
+   <td>email</td> 
+   <td>VARCHAR(60)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>telefono</td> 
+   <td>VARCHAR(15)</td> 
+    <td>SI</td> 
+    <td> - </td> 
+    <td>Teléfono fijo de lugar de habitación </td> 
+</tr> 
+<tr> 
+   <td>movil</td> 
+   <td>VARCHAR(15)</td> 
+    <td>SI</td> 
+    <td> - </td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>direccion</td> 
+   <td>TEXT</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Dirección de habitación del estudiante (Calle, edificio, etc.)</td> 
+</tr> 
+<tr> 
+   <td>carrera_id</td> 
+   <td>INT(10)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Cógido asociado perteneciente a la carrera que cursa</td> 
+</tr> 
+</table> 
+ 
+<h2>libros</h2> 
+<p></p> 
+<table> 
+<tr> 
+<th>CAMPO</th> 
+<th>TIPO</th> 
+<th>NULO</th> 
+<th>EXTRA</th> 
+<th>COMENTARIOS</th> 
+</tr> 
+<tr> 
+   <td>id</td> 
+   <td>INT(10)</td> 
+    <td>NO</td> 
+    <td>AUTO_INCREMENT</td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>codigo</td> 
+   <td>VARCHAR(50)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>código único de identificación del libro en la biblioteca</td> 
+</tr> 
+<tr> 
+   <td>autor</td> 
+   <td>VARCHAR(100)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>titulo</td> 
+   <td>VARCHAR(200)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>descripcion</td> 
+   <td>TEXT</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>editorial</td> 
+   <td>VARCHAR(150)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>ejemplar</td> 
+   <td>TINYINT(1)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Saber si es el original o una copia</td> 
+</tr> 
+<tr> 
+   <td>idioma</td> 
+   <td>VARCHAR(80)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>condicion</td> 
+   <td>VARCHAR(30)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Si se obtuvo nuevo o usado</td> 
+</tr> 
+<tr> 
+   <td>fecha_ingreso</td> 
+   <td>DATE</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Fecha en que fue recibido el libro en la biblioteca</td> 
+</tr> 
+<tr> 
+   <td>categoria_id</td> 
+   <td>INT(10)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Código asociado a la categoría perteneciente al libro</td> 
+</tr> 
+</table> 
+  
+<h2>prestamos</h2> 
+<p></p> 
+<table> 
+<tr> 
+<th>CAMPO</th> 
+<th>TIPO</th> 
+<th>NULO</th> 
+<th>EXTRA</th> 
+<th>COMENTARIOS</th> 
+</tr> 
+<tr> 
+   <td>id</td> 
+   <td>INT(10)</td> 
+    <td>NO</td> 
+    <td>AUTO_INCREMENT</td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>estudiante_id</td> 
+   <td>INT(10)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Id asociado al estudiante que realizó el prestamo</td> 
+</tr> 
+<tr> 
+   <td>libro_id</td> 
+   <td>INT(10)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Id asociado al libro prestado</td> 
+</tr> 
+<tr> 
+   <td>fecha_prestamo</td> 
+   <td>DATE</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Fecha en que se sede el libro en calidad de prestamo</td> 
+</tr> 
+<tr> 
+   <td>fecha_entrega</td> 
+   <td>DATE</td> 
+    <td>SI</td> 
+    <td> - </td> 
+    <td>Fecha en que se recibe el libro</td> 
+</tr> 
+</table> 
+ 
+<h2>supendidos</h2> 
+<p></p> 
+<table> 
+<tr> 
+<th>CAMPO</th> 
+<th>TIPO</th> 
+<th>NULO</th> 
+<th>EXTRA</th> 
+<th>COMENTARIOS</th> 
+</tr> 
+<tr> 
+   <td>id</td> 
+   <td>INT(10)</td> 
+    <td>NO</td> 
+    <td>AUTO_INCREMENT</td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>libro_id</td> 
+   <td>INT(10)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Id asociado al libro por el cual se suspende</td> 
+</tr> 
+<tr> 
+   <td>estudiante_id</td> 
+   <td>INT(10)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Id asociado al estudiante que ha sido suspendido del servicio </td> 
+</tr> 
+<tr> 
+   <td>hasta</td> 
+   <td>DATE</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Fecha hasta la que permanecerá suspendido el estudiante</td> 
+</tr> 
+</table> 
+  
+<h2>usuarios</h2> 
+<p></p> 
+<table> 
+<tr> 
+<th>CAMPO</th> 
+<th>TIPO</th> 
+<th>NULO</th> 
+<th>EXTRA</th> 
+<th>COMENTARIOS</th> 
+</tr> 
+<tr> 
+   <td>id</td> 
+   <td>INT(10)</td> 
+    <td>NO</td> 
+    <td>AUTO_INCREMENT</td> 
+    <td></td> 
+</tr> 
+<tr> 
+   <td>usuario</td> 
+   <td>INT(11)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td>Usuario que tiene acceso para agregar libros, realizar prestamos, etc. (Encargado)</td> 
+</tr> 
+<tr> 
+   <td>password</td> 
+   <td>INT(11)</td> 
+    <td>NO</td> 
+    <td> - </td> 
+    <td></td> 
+</tr> 
+</table> 
+ 
+</body> 
+</html>
