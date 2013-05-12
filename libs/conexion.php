@@ -87,6 +87,7 @@ class Conexion
         if(!$result)
             return NULL;
         
+        
         $cFilas = mysql_num_rows($result);  
         
         if($cFilas > 0)

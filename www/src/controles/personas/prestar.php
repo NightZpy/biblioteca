@@ -21,7 +21,7 @@ if(isset($_GET) and !empty($_GET)){
 				Sesion::setValor('error', $warnings['SUSPENDIDO']);
 				header('Location: '.VISTAS_HTML.'/libros/ver.php?id='.$_GET['libro']);
 			}
-			$strQuery = sprintf("INSERT INTO prestamos (default, %d, %d, CURDATE(), DATE_ADD(CURDATE(), INTERVAL %d DAY))", 
+			$strQuery = sprintf("INSERT INTO prestamos (default, %d, %d, CURDATE(), DATE_ADD(CURDATE()), INTERVAL %d DAY))", 
 								$persona, $_GET['libro'], TIEMPO_PRESTAMO);
 			$resultados = $conexion->seleccionarDatos($strQuery);			
 			$prestamo = $conexion->ultimoID();

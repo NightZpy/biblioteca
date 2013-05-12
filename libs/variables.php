@@ -11,12 +11,17 @@ define('MAIN_LY', LAYOUTS.DS.'main.php');
 define('HEADER_LY', LAYOUTS.DS.'header.php');
 define('FOOTER_LY', LAYOUTS.DS.'footer.php');
 define('LIBS', ROOT.DS.'libs');
+define('TMP', ROOT.DS.'tmp');
+define('SADO_CACHE', TMP.DS.'sado'.DS.'cache');
 define('CONEXION', LIBS.DS.'conexion.php');
 define('ARRAY_CONTROL', LIBS.DS.'array_control.php');
 define('ARREGLO', LIBS.DS.'arreglo.php');
 define('FECHA', LIBS.DS.'fecha.php');
 define('SESION', LIBS.DS.'sesion.php');
 define('VARIABLES', LIBS.DS.'variables.php');
+define('SADO_BOOTSTRAP', LIBS.DS.'Sado'.DS.'sado.bootstrap.php');
+define('ZEBRA', LIBS.DS.'Zebra');
+define('ZEBRA_FORM', LIBS.DS.'Zebra'.DS.'Zebra_Form.php');
 
 //Detalles aplicacion
 define('TITULO', 'Administración Bibliotecaria');
@@ -28,6 +33,9 @@ define('TIEMPO_PRESTAMO', 1);
 //Para enlaces y recursos del lado cliente
 define('ROOT_HTML', '/biblioteca');
 define('CSS', ROOT_HTML.'/css');
+define('ZEBRA_HTML', ROOT_HTML.'/Zebra');
+define('ZEBRA_CSS', ZEBRA_HTML.'/css');
+define('ZEBRA_JS', ZEBRA_HTML.'/js');
 define('JS', ROOT_HTML.'/js');
 define('IMAGES', ROOT_HTML.'/images');
 define('KICKSTART_CSS', CSS.'/kickstart.css');
@@ -45,7 +53,8 @@ $warnings = [
 	'VACIO' => ['titulo' => 'Sin coincidencias', 'descripcion' => '¡La búsqueda no tuvo resultados!'],
 	'USUARIO_INCORRECTO' => ['titulo' => 'Datos incorrectos', 'descripcion' => '¡El usuario o la contraseña son incorrectas!'],
 	'CEDULA_NO_ENCONTRADA' => ['titulo' => 'Sin coincidencias', 'descripcion' => '¡La cédula no se encuentra registrada, debe estar registrado para poder realizar prestamos!'],
-	'SUSPENDIDO' => ['titulo' => 'Suspendido', 'descripcion' => '¡No puede realizar prestamos, se encuentra suspendido aún!']
+	'SUSPENDIDO' => ['titulo' => 'Suspendido', 'descripcion' => '¡No puede realizar prestamos, se encuentra suspendido aún!'],
+	'CORRECTO' => ['titulo' => 'Correcto', 'descripcion' => '¡Datos agregados correctamente!']
 ];
 
 

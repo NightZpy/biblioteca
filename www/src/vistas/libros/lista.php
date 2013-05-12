@@ -29,16 +29,18 @@ if(isset($resultados)){
 						<i class="icon-2x icon-eye-open"></i>
 					</span>
 				</a>
-				<a href="<?php echo CONTROL_HTML.'/libros/editar.php?id='.$valor['id']; ?>">
+	<?php if(Sesion::existe('usuario')): ?>				
+				<a href="<?php echo CONTROL_HTML.'/libros/agregar.php?id='.$valor['id']; ?>">
 					<span class="tooltip" title="Editar libro">
 						<i class="icon-2x icon-pencil"></i>
 					</span>
-				</a>
+				</a>				
 				<a href="<?php echo CONTROL_HTML.'/libros/eliminar.php?id='.$valor['id']; ?>">
 					<span class="tooltip" title="Eliminar libro">
 						<i class="icon-2x icon-minus-sign"></i>
 					</span>
-				</a>															
+				</a>
+	<?php endif; ?>																			
 			</td>
 		</tr>
 		<?php endforeach; ?>

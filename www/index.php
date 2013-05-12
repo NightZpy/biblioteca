@@ -5,7 +5,3 @@ Sesion::iniciarSesion();
 //include_once HEADER_LY;
 header('Location: '.VISTAS_HTML.'/libros/buscar.php');
 ?>
-
-<?php	
-//include_once FOOTER_LY;
-?>

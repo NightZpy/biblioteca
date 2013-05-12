@@ -11,14 +11,23 @@
 		<meta name="copyright" content="" />
 		<link rel="stylesheet" type="text/css" href="<?php echo KICKSTART_CSS; ?>" media="all" />                  <!-- KICKSTART -->		
 		<link rel="stylesheet" type="text/css" href="<?php echo STYLE_CSS; ?>" media="all" />                          <!-- CUSTOM STYLES -->
+		<link rel="stylesheet" type="text/css" href="<?php echo ZEBRA_CSS; ?>/zebra_form.css" media="all" />
 		<style>
 			button { float: right;}
+			h3 { 
+				color: white;
+				font-style: oblique;
+			}
+			.background {
+				background: url("<?php echo IMAGES; ?>/fondo.jpg");
+			}
 		</style>
 
 		<script type="text/javascript" src="<?php echo JQUERY; ?>"></script>
 		<script type="text/javascript" src="<?php echo KICKSTART_JS; ?>"></script> 	
+		<script src="<?php echo ZEBRA_JS; ?>/zebra_form.js"></script>
 	</head>
-<body>
+<body class="background">
 	<div class="col_3"></div>
 	<div class="col_6">
 	 	<ul class="menu center">
@@ -28,9 +37,9 @@ if (Sesion::existe('usuario')) {
 			<li class="current"><a href="<?php echo ROOT_HTML; ?>"><i class="icon-search"></i>Buscar Libro</a></li>
 			<li><a href="#"><i class="icon-plus"></i>Agregar</a>
 				<ul>
-					<li><a href="<?php echo VISTAS_HTML.'/libros/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Libro</a></li>
-					<li><a href="<?php echo VISTAS_HTML.'/personas/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Persona</a></li>
-					<li><a href="<?php echo VISTAS_HTML.'/usuarios/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Usuario</a></li>
+					<li><a href="<?php echo CONTROL_HTML.'/libros/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Libro</a></li>
+					<li><a href="<?php echo CONTROL_HTML.'/personas/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Persona</a></li>
+					<li><a href="<?php echo CONTROL_HTML.'/usuarios/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Usuario</a></li>
 				</ul>
 			</li>
 			<li><a href="<?php echo VISTAS_HTML.'/personas/estado.php'; ?>"><i class="icon-question-sign"></i>Estado Persona</a></li>
@@ -61,5 +70,14 @@ if(Sesion::existe('error')){
 <a href="#close" class="icon-remove"></a></div>
 <?php
 	Sesion::eliminar('error');
+}
+if(Sesion::existe('success')){
+?>
+<div class="notice success"><i class="icon-ok icon-large"></i>
+	<strong><?php echo Sesion::getValor('success')['titulo']; ?>: </strong>
+	<?php echo Sesion::getValor('success')['descripcion']; ?>
+<a href="#close" class="icon-remove"></a></div>
+<?php
+	Sesion::eliminar('success');
 }
 ?>		
