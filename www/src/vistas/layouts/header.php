@@ -42,7 +42,7 @@ if (Sesion::existe('usuario')) {
 					<li><a href="<?php echo CONTROL_HTML.'/usuarios/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Usuario</a></li>
 				</ul>
 			</li>
-			<li><a href="<?php echo VISTAS_HTML.'/personas/estado.php'; ?>"><i class="icon-question-sign"></i>Estado Persona</a></li>
+			<li><a href="<?php echo CONTROL_HTML.'/personas/buscar.php'; ?>"><i class="icon-question-sign"></i>Buscar persona</a></li>
 			<li><a href="<?php echo CONTROL_HTML.'/usuarios/salir.php'; ?>"><i class="icon-signout"></i>Salir</a></li>
 			<li><a href="<?php echo ACERCA_HTML; ?>"><i class="icon-info-sign"></i>Acerca</a></li> 
 <?php
@@ -50,7 +50,7 @@ if (Sesion::existe('usuario')) {
 ?>			
 			<li><a href="<?php echo VISTAS_HTML; ?>/usuarios/ingresar.php"><i class="icon-signin"></i>Ingresar</a></li>
 			<li class="current"><a href="<?php echo VISTAS_HTML.'/libros/buscar.php'; ?>"><i class="icon-search"></i>Buscar Libro</a></li>
-			<li><a href="<?php echo VISTAS_HTML.'/personas/estado.php'; ?>"><i class="icon-question-sign"></i>Estado Persona</a></li>
+			<li><a href="<?php echo CONTROL_HTML.'/personas/buscar.php'; ?>"><i class="icon-question-sign"></i>Buscar persona</a></li>
 			<li><a href="<?php echo ACERCA_HTML; ?>"><i class="icon-info-sign"></i>Acerca</a></li>
 <?php
 }
