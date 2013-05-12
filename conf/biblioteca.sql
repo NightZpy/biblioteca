@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 09-05-2013 a las 03:46:53
+-- Tiempo de generación: 12-05-2013 a las 14:29:10
 -- Versión del servidor: 5.5.29
 -- Versión de PHP: 5.4.12
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `libros` (
   `codigo` varchar(50) NOT NULL COMMENT 'código único de identificación del libro en la biblioteca',
   `autor` varchar(100) NOT NULL,
   `titulo` varchar(200) NOT NULL,
-  `descripcion` text NOT NULL,
+  `descripcion` text,
   `editorial` varchar(150) NOT NULL,
   `ejemplar` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Saber si es el original o una copia',
   `fecha_ingreso` date NOT NULL COMMENT 'Fecha en que fue recibido el libro en la biblioteca',
@@ -59,15 +59,16 @@ CREATE TABLE IF NOT EXISTS `libros` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `codigo` (`codigo`),
   KEY `categoria_id` (`categoria_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `libros`
 --
 
 INSERT INTO `libros` (`id`, `codigo`, `autor`, `titulo`, `descripcion`, `editorial`, `ejemplar`, `fecha_ingreso`, `categoria_id`) VALUES
-(2, 'abcdef', 'Laurent', 'Calculo ', 'Calculos con derivadas e integrales', 'Numeric Editorial', 1, '2013-02-02', 1),
-(3, 'axcdeg', 'José', 'Geometria ', 'Calculos y representación geometrica', 'Santillana', 1, '2013-01-02', 1);
+(2, 'abcdef', 'Laurent', 'Calculo ', 'Calculos con derivadas e integrales', 'Numeric Editorial', 0, '2013-05-31', 1),
+(3, 'axcdeg', 'José', 'Geometria ', 'Calculos y representación geometrica', 'Santillana', 1, '2013-05-30', 1),
+(6, '1234', 'Heinzh Dietrich', 'Aviones', 'asdfasdfasdfasdfasdfasdf', 'Tech', 1, '2013-05-15', 1);
 
 -- --------------------------------------------------------
 
@@ -77,7 +78,6 @@ INSERT INTO `libros` (`id`, `codigo`, `autor`, `titulo`, `descripcion`, `editori
 
 CREATE TABLE IF NOT EXISTS `personas` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(100) DEFAULT NULL COMMENT 'Código del estudiante dentro de la institución',
   `nombres` varchar(50) NOT NULL,
   `apellidos` varchar(50) NOT NULL,
   `cedula` varchar(10) NOT NULL,
@@ -90,10 +90,16 @@ CREATE TABLE IF NOT EXISTS `personas` (
   `tipo_persona_id` int(10) unsigned NOT NULL COMMENT 'Cógido asociado perteneciente a la carrera que cursa',
   PRIMARY KEY (`id`),
   UNIQUE KEY `cedula` (`cedula`),
-  UNIQUE KEY `codigo` (`codigo`),
   KEY `carrera_id` (`tipo_persona_id`),
   KEY `tipo_persona_id` (`tipo_persona_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `personas`
+--
+
+INSERT INTO `personas` (`id`, `nombres`, `apellidos`, `cedula`, `nacionalidad`, `email`, `telefono`, `movil`, `direccion`, `procedencia`, `tipo_persona_id`) VALUES
+(1, 'Lenynnnnn', 'asdfasdf', '1234567', 'e', 'Lenyn@gmail.com', '123412', '123423412', 'dfasdf', 'asdfasdfasdfasdfasdfasd', 3);
 
 -- --------------------------------------------------------
 
@@ -110,15 +116,22 @@ CREATE TABLE IF NOT EXISTS `prestamos` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `usuario_id` (`persona_id`,`libro_id`),
   KEY `libro_id` (`libro_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Volcado de datos para la tabla `prestamos`
+--
+
+INSERT INTO `prestamos` (`id`, `persona_id`, `libro_id`, `fecha_prestamo`, `fecha_entrega`) VALUES
+(12, 1, 2, '2013-05-12', '2013-05-13');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `supendidos`
+-- Estructura de tabla para la tabla `suspendidos`
 --
 
-CREATE TABLE IF NOT EXISTS `supendidos` (
+CREATE TABLE IF NOT EXISTS `suspendidos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `libro_id` int(10) unsigned NOT NULL COMMENT 'Id asociado al libro por el cual se suspende',
   `persona_id` int(10) unsigned NOT NULL COMMENT 'Id asociado al estudiante que ha sido suspendido del servicio ',
@@ -139,7 +152,17 @@ CREATE TABLE IF NOT EXISTS `tipo_personas` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(60) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `tipo_personas`
+--
+
+INSERT INTO `tipo_personas` (`id`, `nombre`) VALUES
+(1, 'Profesor'),
+(2, 'Alumno'),
+(3, 'Interno'),
+(4, 'Circulante');
 
 -- --------------------------------------------------------
 
@@ -149,8 +172,8 @@ CREATE TABLE IF NOT EXISTS `tipo_personas` (
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `usuario` int(11) NOT NULL COMMENT 'Usuario que tiene acceso para agregar libros, realizar prestamos, etc. (Encargado)',
-  `password` int(11) NOT NULL,
+  `usuario` varchar(50) NOT NULL COMMENT 'Usuario que tiene acceso para agregar libros, realizar prestamos, etc. (Encargado)',
+  `password` varchar(200) NOT NULL,
   `cedula` varchar(15) NOT NULL,
   `nombres` varchar(100) NOT NULL,
   `apellidos` varchar(100) NOT NULL,
@@ -160,7 +183,15 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `usuario` (`usuario`),
   UNIQUE KEY `cedula` (`cedula`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `usuario`, `password`, `cedula`, `nombres`, `apellidos`, `direccion`, `email`, `movil`) VALUES
+(1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', '1234', 'Administrador 1', 'Admini', 'Por ahí', 'admin@biblioteca.com', '12345678'),
+(2, 'user2', 'e10adc3949ba59abbe56e057f20f883e', '234234234', 'asdfa', 'asfadf', 'asdfasdfasdf', 'lenyn@algo.com', '234234234234');
 
 --
 -- Restricciones para tablas volcadas
@@ -182,14 +213,14 @@ ALTER TABLE `personas`
 -- Filtros para la tabla `prestamos`
 --
 ALTER TABLE `prestamos`
-  ADD CONSTRAINT `prestamos_ibfk_3` FOREIGN KEY (`persona_id`) REFERENCES `personas` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `prestamos_ibfk_2` FOREIGN KEY (`libro_id`) REFERENCES `libros` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `prestamos_ibfk_2` FOREIGN KEY (`libro_id`) REFERENCES `libros` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `prestamos_ibfk_3` FOREIGN KEY (`persona_id`) REFERENCES `personas` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `supendidos`
+-- Filtros para la tabla `suspendidos`
 --
-ALTER TABLE `supendidos`
-  ADD CONSTRAINT `supendidos_ibfk_1` FOREIGN KEY (`libro_id`) REFERENCES `libros` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `suspendidos`
+  ADD CONSTRAINT `suspendidos_ibfk_1` FOREIGN KEY (`libro_id`) REFERENCES `libros` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
