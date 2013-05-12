@@ -18,15 +18,25 @@ if(isset($_GET) and !empty($_GET)){
 
 	if(isset($_GET['chk_autor']) and !empty($_GET['chk_autor']) and $_GET['chk_autor'] == 'on')
 		if(isset($_GET['autor']) and !empty($_GET['autor']))
-			$strQuery .= $condicion." LOWER(autor) LIKE LOWER('%".$_GET['autor']."%')";
+			if(isset($_GET['codigo']) and !empty($_GET['codigo']))
+				$strQuery .= $condicion." LOWER(autor) LIKE LOWER('%".$_GET['autor']."%')";
+			else
+				$strQuery .= "LOWER(autor) LIKE LOWER('%".$_GET['autor']."%')";
 
 	if(isset($_GET['chk_titulo']) and !empty($_GET['chk_titulo']) and $_GET['chk_titulo'] == 'on')	
 		if(isset($_GET['titulo']) and !empty($_GET['titulo']))
-			$strQuery .= $condicion." LOWER(titulo) LIKE LOWER('%".$_GET['titulo']."%')";			
+			if(isset($_GET['autor']) and !empty($_GET['autor']))
+				$strQuery .= $condicion." LOWER(titulo) LIKE LOWER('%".$_GET['titulo']."%')";			
+			else
+				$strQuery .= "LOWER(titulo) LIKE LOWER('%".$_GET['titulo']."%')";			
 
 	if(isset($_GET['chk_editorial']) and !empty($_GET['chk_editorial']) and $_GET['chk_editorial'] == 'on')		
 		if(isset($_GET['editorial']) and !empty($_GET['editorial']))	
-			$strQuery .= $condicion." LOWER(editorial) LIKE LOWER('%".$_GET['editorial']."%')";
+			if(isset($_GET['titulo']) and !empty($_GET['titulo']))
+				$strQuery .= $condicion." LOWER(editorial) LIKE LOWER('%".$_GET['editorial']."%')";
+			else
+				$strQuery .= "LOWER(editorial) LIKE LOWER('%".$_GET['editorial']."%')";
+
 	$conexion = new Conexion($database);
 	$resultados = $conexion->seleccionarDatos($strQuery);	
 	$conexion->cerrarConexion();

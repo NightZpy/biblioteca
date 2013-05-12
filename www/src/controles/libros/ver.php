@@ -16,7 +16,7 @@ if(isset($_GET) and !empty($_GET)){
 
 		if($resultados and !empty($resultados)){
 			$libro = $resultados[0];
-			include_once VISTAS.DS.'personas'.DS.'ver.php';
+			include_once VISTAS.DS.'libros'.DS.'ver.php';
 		} else {
 			$error = true;
 		}		

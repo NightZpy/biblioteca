@@ -42,7 +42,6 @@ if(isset($_GET) and !empty($_GET)){
 		} else {
 			$error = true;
 		}
-
 	}		
 } else {
 	$error = true;
