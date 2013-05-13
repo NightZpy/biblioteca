@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 12-05-2013 a las 16:06:20
+-- Tiempo de generación: 13-05-2013 a las 07:22:18
 -- Versión del servidor: 5.5.29
 -- Versión de PHP: 5.4.12
 
@@ -59,14 +59,13 @@ CREATE TABLE IF NOT EXISTS `libros` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `codigo` (`codigo`),
   KEY `categoria_id` (`categoria_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Volcado de datos para la tabla `libros`
 --
 
 INSERT INTO `libros` (`id`, `codigo`, `autor`, `titulo`, `descripcion`, `editorial`, `ejemplar`, `fecha_ingreso`, `categoria_id`) VALUES
-(2, 'abcdef', 'Laurent', 'Calculo ', 'Calculos con derivadas e integrales', 'Numeric Editorial', 0, '2013-05-31', 1),
 (3, 'axcdeg', 'José', 'Geometria ', 'Calculos y representación geometrica', 'Santillana', 1, '2013-05-30', 1),
 (6, '1234', 'Heinzh Dietrich', 'Aviones', 'asdfasdfasdfasdfasdfasdf', 'Tech', 1, '2013-05-15', 1);
 
@@ -92,14 +91,15 @@ CREATE TABLE IF NOT EXISTS `personas` (
   UNIQUE KEY `cedula` (`cedula`),
   KEY `carrera_id` (`tipo_persona_id`),
   KEY `tipo_persona_id` (`tipo_persona_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `personas`
 --
 
 INSERT INTO `personas` (`id`, `nombres`, `apellidos`, `cedula`, `nacionalidad`, `email`, `telefono`, `movil`, `direccion`, `procedencia`, `tipo_persona_id`) VALUES
-(1, 'Lenynnnnn', 'asdfasdf', '1234567', 'e', 'Lenyn@gmail.com', '123412', '123423412', 'dfasdf', 'asdfasdfasdfasdfasdfasd', 3);
+(1, 'Lenynnnnn', 'asdfasdf', '1234567', 'e', 'Lenyn@gmail.com', '123412', '123423412', 'dfasdf', 'asdfasdfasdfasdfasdfasd', 3),
+(2, 'pedro', 'ramirez', '19729157', 'v', 'r_ramirez@hotmail.com', '2147483647', '02767678678', 'barrio sucre', 'bolivariana', 2);
 
 -- --------------------------------------------------------
 
@@ -110,21 +110,25 @@ INSERT INTO `personas` (`id`, `nombres`, `apellidos`, `cedula`, `nacionalidad`, 
 CREATE TABLE IF NOT EXISTS `prestamos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `persona_id` int(10) unsigned NOT NULL COMMENT 'Id asociado al estudiante que realizó el prestamo',
+  `usuario_id` int(10) unsigned NOT NULL COMMENT 'Identificador del usuario que aprueba el prestamo',
   `libro_id` int(10) unsigned NOT NULL COMMENT 'Id asociado al libro prestado',
   `fecha_prestamo` date NOT NULL COMMENT 'Fecha en que se sede el libro en calidad de prestamo',
   `fecha_entrega` date NOT NULL COMMENT 'Fecha en que se recibe el libro',
   `fecha_entregado` date DEFAULT NULL COMMENT 'Fecha en que es devuelto el libro',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `usuario_id` (`persona_id`,`libro_id`),
-  KEY `libro_id` (`libro_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+  KEY `libro_id` (`libro_id`),
+  KEY `usuario_id_2` (`usuario_id`),
+  KEY `libro_id_2` (`libro_id`),
+  KEY `prestamos_ibfk_4` (`persona_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
 -- Volcado de datos para la tabla `prestamos`
 --
 
-INSERT INTO `prestamos` (`id`, `persona_id`, `libro_id`, `fecha_prestamo`, `fecha_entrega`, `fecha_entregado`) VALUES
-(12, 1, 2, '2013-05-12', '2013-05-13', NULL);
+INSERT INTO `prestamos` (`id`, `persona_id`, `usuario_id`, `libro_id`, `fecha_prestamo`, `fecha_entrega`, `fecha_entregado`) VALUES
+(26, 1, 1, 3, '2013-05-13', '2013-05-14', NULL),
+(28, 2, 1, 6, '2013-05-13', '2013-05-14', NULL);
 
 -- --------------------------------------------------------
 
@@ -214,14 +218,16 @@ ALTER TABLE `personas`
 -- Filtros para la tabla `prestamos`
 --
 ALTER TABLE `prestamos`
-  ADD CONSTRAINT `prestamos_ibfk_2` FOREIGN KEY (`libro_id`) REFERENCES `libros` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `prestamos_ibfk_3` FOREIGN KEY (`persona_id`) REFERENCES `personas` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `prestamos_ibfk_6` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `prestamos_ibfk_4` FOREIGN KEY (`persona_id`) REFERENCES `personas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `prestamos_ibfk_5` FOREIGN KEY (`libro_id`) REFERENCES `libros` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `suspendidos`
 --
 ALTER TABLE `suspendidos`
-  ADD CONSTRAINT `suspendidos_ibfk_1` FOREIGN KEY (`libro_id`) REFERENCES `libros` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `suspendidos_ibfk_3` FOREIGN KEY (`persona_id`) REFERENCES `personas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `suspendidos_ibfk_2` FOREIGN KEY (`libro_id`) REFERENCES `libros` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
