@@ -7,14 +7,14 @@ if(Sesion::existe('usuario')){
 	$conexion = new Conexion($database);
 	$id = $_GET['id'];
 	if(is_numeric($id)){	
-		$strQuery = "DELETE FROM libros WHERE id=$id";		
+		$strQuery = "DELETE FROM personas WHERE id=$id";		
 		$resultado = $conexion->agregarRegistro($strQuery);
 		$conexion->cerrarConexion();
 		if($resultado)
 			Sesion::setValor('success', $warnings['ELIMINADO']);
 		else 
 			Sesion::setValor('error', $warnings['NO_ELIMINADO']);
-		header('Location: '.VISTAS_HTML.'/libros/buscar.php');		
+		header('Location: '.VISTAS_HTML.'/personas/buscar.php');		
 	}
 } else {
 	Sesion::setValor('error', $warnings['SIN_PERMISOS']);

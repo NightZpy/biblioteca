@@ -63,7 +63,7 @@ include_once HEADER_LY;
 <form id="frmBusqueda" class="vertical" action="<?php echo CONTROL_HTML; ?>/libros/buscar.php" method="get">		
 	<div class="col_4 column">
 		<fieldset>
-			<legend class="large"><i class="icon-signout"></i>Filtro</legend>
+			<legend class="large"><i class="icon-2x icon-filter"></i>Filtro</legend>
 			<input id="chk_condicion" class="checkbox" type="checkbox" name="chk_condicion">
 			<label class="inline" for="chk_condicion">¿Se deben cumplir todas las condiciones?</label>			
 			<br>
