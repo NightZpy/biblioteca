@@ -59,6 +59,28 @@
 		</tbody>
 	</table>
 	<?php endif; ?>
+
+	<?php if($suspendidos AND isset($suspendidos) AND count($suspendidos)>0): ?>
+	<h5 class="left">Veces suspendido: </h5>	
+	<table cellspacing="0" cellpadding="0" class="sortable">
+		<thead>
+			<tr>
+				<th>Título</th>
+				<th>Desde/th>
+				<th>Hasta</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($suspendidos as $suspendido): ?>
+			<tr>
+				<td><?php echo $suspendido['titulo']; ?></td>
+				<td><?php echo $suspendido['desde']; ?></td>
+				<td><?php echo $suspendido['hasta']; ?></td>
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
+	<?php endif; ?>	
 </legend>
 <?php endif; ?>
 <?php include_once FOOTER_LY; ?>
