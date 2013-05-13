@@ -62,22 +62,19 @@ if (Sesion::existe('usuario')) {
 	<div class="col_3"></div>
 	<div class="col_6">
 <?php
-if(Sesion::existe('error')){
+if(Sesion::existe('error')):
 ?>
 <div class="notice warning"><i class="icon-warning-sign icon-large"></i>
 	<strong><?php echo Sesion::getValor('error')['titulo']; ?>: </strong>
 	<?php echo Sesion::getValor('error')['descripcion']; ?>
 <a href="#close" class="icon-remove"></a></div>
-<?php
-	Sesion::eliminar('error');
-}
-if(Sesion::existe('success')){
-?>
+<?php Sesion::eliminar('error');  ?>
+<?php endif;  ?>
+
+<?php if(Sesion::existe('success')): ?>
 <div class="notice success"><i class="icon-ok icon-large"></i>
 	<strong><?php echo Sesion::getValor('success')['titulo']; ?>: </strong>
 	<?php echo Sesion::getValor('success')['descripcion']; ?>
 <a href="#close" class="icon-remove"></a></div>
-<?php
-	Sesion::eliminar('success');
-}
-?>		
+<?php Sesion::eliminar('success'); ?>
+<?php endif;  ?>		

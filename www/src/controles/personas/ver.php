@@ -22,7 +22,7 @@ if(isset($_GET) and !empty($_GET)){
 		$resultados = $conexion->seleccionarDatos($strQuery);	
 		if(count($resultados)>0){
 			$persona = $resultados[0];
-			$strQuery = 'SELECT pr.fecha_entrega, pr.fecha_prestamo, l.titulo, l.codigo FROM prestamos pr JOIN libros l ON pr.libro_id=l.id WHERE pr.persona_id=';
+			$strQuery = 'SELECT pr.id, pr.fecha_entrega, pr.fecha_prestamo, pr.fecha_entregado, l.titulo, l.codigo FROM prestamos pr JOIN libros l ON pr.libro_id=l.id WHERE pr.persona_id=';
 			$strQuery .= $persona['id'];
 			$resultados = $conexion->seleccionarDatos($strQuery);
 			if(count($resultados)>0){

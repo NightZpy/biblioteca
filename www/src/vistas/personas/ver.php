@@ -1,4 +1,10 @@
 <?php include_once HEADER_LY; ?>
+<?php if(Sesion::existe('suspendido')): ?>
+<div class="notice warning"><i class="icon-warning-sign icon-large"></i>
+	<strong><?php echo Sesion::getValor('suspendido')['titulo']; ?>: </strong>
+	<?php echo Sesion::getValor('suspendido')['descripcion']; ?>
+<a href="#close" class="icon-remove"></a></div>
+<?php endif; ?>
 <?php if(isset($persona)): ?>
 <h3 class="center"><?php echo $persona['nombres'].' '.$persona['apellidos']?></h3>
 <hr class="alt2" />
@@ -21,6 +27,10 @@
 				<th>Título</th>
 				<th>Fecha de prestamo</th>
 				<th>Fecha de entrega</th>
+				<th>Se entrego el</th>
+				<?php if(Sesion::existe('usuario')): ?>	
+				<th>Acciones</th>
+				<?php endif; ?>	
 			</tr>
 		</thead>
 		<tbody>
@@ -29,7 +39,21 @@
 				<td><?php echo $prestamo['codigo']; ?></td>
 				<td><?php echo $prestamo['titulo']; ?></td>
 				<td><?php echo $prestamo['fecha_prestamo']; ?></td>
-				<td><?php echo $prestamo['fecha_entrega']; ?></td>					
+				<td><?php echo $prestamo['fecha_entrega']; ?></td>
+				<th><?php echo ($prestamo['fecha_entregado'] == '' ? '¡No se ha entregado!' : $prestamo['fecha_entregado']); ?></th>
+				<?php if(Sesion::existe('usuario')): ?>	
+				<td>
+				<?php if($prestamo['fecha_entregado'] != ''): ?>
+					<strong>Entregado</strong>
+				<?php else: ?>								
+					<a href="<?php echo CONTROL_HTML.'/personas/devolver.php?id='.$prestamo['id'].'&cedula='.$persona['cedula'];?>">
+						<span class="tooltip" title="Devolver libro">
+							<i class="icon-2x icon-exchange"></i>
+						</span>
+					</a>	
+				<?php endif; ?>														
+				</td>
+				<?php endif; ?>
 			</tr>
 			<?php endforeach; ?>
 		</tbody>

@@ -28,6 +28,7 @@ define('TITULO', 'Administración Bibliotecaria');
 define('IDIOMA', 'es');
 define('AUTOR', '');
 define('TIEMPO_PRESTAMO', 1);
+define('TIEMPO_SUSPENSION', 30);
 
 
 //Para enlaces y recursos del lado cliente
@@ -53,8 +54,12 @@ $warnings = [
 	'VACIO' => ['titulo' => 'Sin coincidencias', 'descripcion' => '¡La búsqueda no tuvo resultados!'],
 	'USUARIO_INCORRECTO' => ['titulo' => 'Datos incorrectos', 'descripcion' => '¡El usuario o la contraseña son incorrectas!'],
 	'CEDULA_NO_ENCONTRADA' => ['titulo' => 'Sin coincidencias', 'descripcion' => '¡La cédula no se encuentra registrada, debe estar registrado para poder realizar prestamos!'],
-	'SUSPENDIDO' => ['titulo' => 'Suspendido', 'descripcion' => '¡No puede realizar prestamos, se encuentra suspendido aún!'],
-	'CORRECTO' => ['titulo' => 'Correcto', 'descripcion' => '¡Datos agregados correctamente!']
+	'SUSPENDIDO' => ['titulo' => 'Suspendido', 'descripcion' => '¡Usted ha sido suspendido por entrega tardía!'],
+	'SUSPENSION' => ['titulo' => 'Suspendido', 'descripcion' => '¡No puede realizar prestamos, se encuentra suspendido aún!'],
+	'CORRECTO' => ['titulo' => 'Correcto', 'descripcion' => '¡Datos agregados correctamente!'],
+	'DEVUELTO' => ['titulo' => 'Correcto', 'descripcion' => '¡El libro ha sido devuelto correctamente!'],
+	'SIN_PRESTAMO' => ['titulo' => 'Prestamo incorrecto', 'descripcion' => '¡El prestamo no se encuentra registrado!'],
+	'SIN_PERMISOS' => ['titulo' => 'Sin permisos', 'descripcion' => '¡No tiene los permisos suficientes para realizar está acción!']
 ];
 
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 12-05-2013 a las 14:29:10
+-- Tiempo de generación: 12-05-2013 a las 16:06:20
 -- Versión del servidor: 5.5.29
 -- Versión de PHP: 5.4.12
 
@@ -112,7 +112,8 @@ CREATE TABLE IF NOT EXISTS `prestamos` (
   `persona_id` int(10) unsigned NOT NULL COMMENT 'Id asociado al estudiante que realizó el prestamo',
   `libro_id` int(10) unsigned NOT NULL COMMENT 'Id asociado al libro prestado',
   `fecha_prestamo` date NOT NULL COMMENT 'Fecha en que se sede el libro en calidad de prestamo',
-  `fecha_entrega` date DEFAULT NULL COMMENT 'Fecha en que se recibe el libro',
+  `fecha_entrega` date NOT NULL COMMENT 'Fecha en que se recibe el libro',
+  `fecha_entregado` date DEFAULT NULL COMMENT 'Fecha en que es devuelto el libro',
   PRIMARY KEY (`id`),
   UNIQUE KEY `usuario_id` (`persona_id`,`libro_id`),
   KEY `libro_id` (`libro_id`)
@@ -122,8 +123,8 @@ CREATE TABLE IF NOT EXISTS `prestamos` (
 -- Volcado de datos para la tabla `prestamos`
 --
 
-INSERT INTO `prestamos` (`id`, `persona_id`, `libro_id`, `fecha_prestamo`, `fecha_entrega`) VALUES
-(12, 1, 2, '2013-05-12', '2013-05-13');
+INSERT INTO `prestamos` (`id`, `persona_id`, `libro_id`, `fecha_prestamo`, `fecha_entrega`, `fecha_entregado`) VALUES
+(12, 1, 2, '2013-05-12', '2013-05-13', NULL);
 
 -- --------------------------------------------------------
 
