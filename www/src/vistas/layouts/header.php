@@ -52,7 +52,7 @@ if (Sesion::existe('usuario')) {
 <?php
 } else {
 ?>			
-			<li><a href="<?php echo VISTAS_HTML; ?>/usuarios/ingresar.php"><i class="icon-signin"></i>Ingresar</a></li>
+			<li><a href="<?php echo VISTAS_HTML; ?>/usuarios/ingresar.php"><i class="icon-2x icon-signin"></i>Ingresar</a></li>
 			<li><a href="#"><i class="icon-2x icon-search"></i>Buscar</a>
 				<ul>
 					<li><a href="<?php echo ROOT_HTML; ?>"><i class="icon-search"></i>Libro</a></li>
