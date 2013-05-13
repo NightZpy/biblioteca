@@ -127,22 +127,26 @@ $form->add('note', 'note_date', 'date', 'El formato de la fecha es Y-m-d');
 $form->add('submit', 'btnEnviar', 'Enviar');
 
 if ($form->validate()) {
-	$conexion = new Conexion($database);
-	$id = $_POST['id'];
-	if(is_numeric($id)){	
-		$strQuery = "UPDATE libros SET codigo='%s', autor='%s', titulo='%s', descripcion='%s', editorial='%s', ejemplar=%d, fecha_ingreso='%s', categoria_id=%d WHERE id=$id";		
+	if(Sesion::existe('usuario')){
+		$conexion = new Conexion($database);
+		$id = $_POST['id'];
+		if(is_numeric($id)){	
+			$strQuery = "UPDATE libros SET codigo='%s', autor='%s', titulo='%s', descripcion='%s', editorial='%s', ejemplar=%d, fecha_ingreso='%s', categoria_id=%d WHERE id=$id";		
+		} else {
+			$strQuery = "INSERT INTO `libros`(`id`, `codigo`, `autor`, `titulo`, `descripcion`, `editorial`, `ejemplar`, `fecha_ingreso`, `categoria_id`) 
+					VALUES (default,'%s','%s','%s','%s','%s', %d, '%s', %d)";				
+		}
+
+		$strQuery = sprintf($strQuery, $_POST['codigo'], $_POST['autor'], $_POST['titulo'], $_POST['descripcion'], $_POST['editorial'], 
+							(isset($_POST['ejemplar']) && $_POST['ejemplar'] == 'si' ? 1 : 0), $_POST['fecha'], $_POST['categoria']);
+		$conexion->agregarRegistro($strQuery);
+		$conexion->cerrarConexion();
+		Sesion::setValor('success', $warnings['CORRECTO']);
+		header('Location: '.CONTROL_HTML.'/libros/agregar.php');	
 	} else {
-		$strQuery = "INSERT INTO `libros`(`id`, `codigo`, `autor`, `titulo`, `descripcion`, `editorial`, `ejemplar`, `fecha_ingreso`, `categoria_id`) 
-				VALUES (default,'%s','%s','%s','%s','%s', %d, '%s', %d)";				
+		Sesion::setValor('error', $warnings['SIN_PERMISOS']);
+		header('Location: '.ROOT_HTML);	
 	}
-
-	$strQuery = sprintf($strQuery, $_POST['codigo'], $_POST['autor'], $_POST['titulo'], $_POST['descripcion'], $_POST['editorial'], 
-						(isset($_POST['ejemplar']) && $_POST['ejemplar'] == 'si' ? 1 : 0), $_POST['fecha'], $_POST['categoria']);
-	$conexion->agregarRegistro($strQuery);
-	$conexion->cerrarConexion();
-	Sesion::setValor('success', $warnings['CORRECTO']);
-	header('Location: '.CONTROL_HTML.'/libros/agregar.php');	
-
 } else {
     $form->render(VISTAS.DS.'libros'.DS.'agregar.php');
 }

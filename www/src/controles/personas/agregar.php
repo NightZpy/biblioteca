@@ -148,24 +148,28 @@ $obj->set_rule(array(
 // "submit"
 $form->add('submit', 'btnEnviar', 'Enviar');
 
-if ($form->validate()) {
-	$conexion = new Conexion($database);
-	$id = $_POST['id'];
-	if(is_numeric($id)){	
-		$strQuery = "UPDATE personas SET cedula='%s', apellidos='%s', nombres='%s', nacionalidad='%s', email='%s', telefono=%d, movil='%s', tipo_persona_id=%d, direccion='%s', procedencia='%s' WHERE id=$id";		
+if ($form->validate()) {	
+	if(Sesion::existe('usuario')){
+		$conexion = new Conexion($database);
+		$id = $_POST['id'];
+		if(is_numeric($id)){	
+			$strQuery = "UPDATE personas SET cedula='%s', apellidos='%s', nombres='%s', nacionalidad='%s', email='%s', telefono=%d, movil='%s', tipo_persona_id=%d, direccion='%s', procedencia='%s' WHERE id=$id";		
+		} else {
+			$strQuery = "INSERT INTO `personas`(`id`, `cedula`, `apellidos`, `nombres`, `nacionalidad`, `email`, `telefono`, `movil`, `tipo_persona_id`, direccion, procedencia) 
+					VALUES (default,'%s','%s','%s','%s','%s', %d, '%s', %d, '%s', '%s')";				
+		}
+
+		$strQuery = sprintf($strQuery, $_POST['cedula'], $_POST['apellido'], $_POST['nombre'], $_POST['nacionalidad'], $_POST['email'], 
+							$_POST['telefono'], $_POST['movil'], $_POST['tipo'], $_POST['direccion'], $_POST['procedencia']);
+
+		$conexion->agregarRegistro($strQuery);
+		$conexion->cerrarConexion();
+		Sesion::setValor('success', $warnings['CORRECTO']);
+		header('Location: '.CONTROL_HTML.'/personas/agregar.php');	
 	} else {
-		$strQuery = "INSERT INTO `personas`(`id`, `cedula`, `apellidos`, `nombres`, `nacionalidad`, `email`, `telefono`, `movil`, `tipo_persona_id`, direccion, procedencia) 
-				VALUES (default,'%s','%s','%s','%s','%s', %d, '%s', %d, '%s', '%s')";				
+		Sesion::setValor('error', $warnings['SIN_PERMISOS']);
+		header('Location: '.ROOT_HTML);	
 	}
-
-	$strQuery = sprintf($strQuery, $_POST['cedula'], $_POST['apellido'], $_POST['nombre'], $_POST['nacionalidad'], $_POST['email'], 
-						$_POST['telefono'], $_POST['movil'], $_POST['tipo'], $_POST['direccion'], $_POST['procedencia']);
-
-	$conexion->agregarRegistro($strQuery);
-	$conexion->cerrarConexion();
-	Sesion::setValor('success', $warnings['CORRECTO']);
-	header('Location: '.CONTROL_HTML.'/personas/agregar.php');	
-
 } else {
     $form->render(VISTAS.DS.'personas'.DS.'agregar.php');
 }

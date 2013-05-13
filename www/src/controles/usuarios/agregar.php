@@ -113,23 +113,27 @@ $obj->set_rule(array(
 $form->add('submit', 'btnEnviar', 'Enviar');
 
 if ($form->validate()) {
-	$conexion = new Conexion($database);
-	$id = $_POST['id'];
-	if(is_numeric($id)){	
-		$strQuery = "UPDATE usuarios SET usuario='%s', password='%s',  cedula='%s', apellidos='%s', nombres='%s', email='%s', movil='%s', direccion='%s' WHERE id=$id";	
+	if(Sesion::existe('usuario')){
+		$conexion = new Conexion($database);
+		$id = $_POST['id'];
+		if(is_numeric($id)){	
+			$strQuery = "UPDATE usuarios SET usuario='%s', password='%s',  cedula='%s', apellidos='%s', nombres='%s', email='%s', movil='%s', direccion='%s' WHERE id=$id";	
+		} else {
+			$strQuery = "INSERT INTO `usuarios`(`id`, usuario, password, `cedula`, `apellidos`, `nombres`, `email`, `movil`, direccion) 
+					VALUES (default,'%s','%s','%s','%s','%s', '%s', '%s', '%s')";				
+		}
+
+		$strQuery = sprintf($strQuery, $_POST['usuario'], md5($_POST['password']), $_POST['cedula'], $_POST['apellido'], $_POST['nombre'], $_POST['email'], 
+							$_POST['movil'], $_POST['direccion']);
+
+		$conexion->agregarRegistro($strQuery);
+		$conexion->cerrarConexion();
+		Sesion::setValor('success', $warnings['CORRECTO']);
+		header('Location: '.CONTROL_HTML.'/usuarios/agregar.php');	
 	} else {
-		$strQuery = "INSERT INTO `usuarios`(`id`, usuario, password, `cedula`, `apellidos`, `nombres`, `email`, `movil`, direccion) 
-				VALUES (default,'%s','%s','%s','%s','%s', '%s', '%s', '%s')";				
+		Sesion::setValor('error', $warnings['SIN_PERMISOS']);
+		header('Location: '.ROOT_HTML);	
 	}
-
-	$strQuery = sprintf($strQuery, $_POST['usuario'], md5($_POST['password']), $_POST['cedula'], $_POST['apellido'], $_POST['nombre'], $_POST['email'], 
-						$_POST['movil'], $_POST['direccion']);
-
-	$conexion->agregarRegistro($strQuery);
-	$conexion->cerrarConexion();
-	Sesion::setValor('success', $warnings['CORRECTO']);
-	header('Location: '.CONTROL_HTML.'/usuarios/agregar.php');	
-
 } else {
     $form->render(VISTAS.DS.'usuarios'.DS.'agregar.php');
 }
