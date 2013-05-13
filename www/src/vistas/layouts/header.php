@@ -31,15 +31,15 @@
 	<div class="col_3"></div>
 	<div class="col_6">
 	 	<ul class="menu center">
-<?php
-if (Sesion::existe('usuario')) {
-?>	
 			<li><a href="#"><i class="icon-2x icon-search"></i>Buscar</a>
 				<ul>
-					<li><a href="<?php echo ROOT_HTML; ?>"><i class="icon-search"></i>Libro</a></li>
+					<li><a href="<?php echo CONTROL_HTML; ?>/libros/buscar.php"><i class="icon-search"></i>Libro</a></li>
 					<li><a href="<?php echo CONTROL_HTML.'/personas/buscar.php'; ?>"><i class="icon-search"></i>Persona</a></li>
 				</ul>
-			</li>
+			</li>	 		
+<?php
+if (Sesion::existe('usuario')) :
+?>	
 			<li><a href="#"><i class="icon-2x icon-plus"></i>Agregar</a>
 				<ul>
 					<li><a href="<?php echo CONTROL_HTML.'/libros/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Libro</a></li>
@@ -48,30 +48,19 @@ if (Sesion::existe('usuario')) {
 				</ul>
 			</li>			
 			<li><a href="<?php echo CONTROL_HTML.'/usuarios/salir.php'; ?>"><i class="icon-2x icon-signout"></i>Salir</a></li>
-			<li><a href="<?php echo ACERCA_HTML; ?>"><i class="icon-2x icon-info-sign"></i>Acerca</a></li> 
 <?php
-} else {
+else :
 ?>			
 			<li><a href="<?php echo VISTAS_HTML; ?>/usuarios/ingresar.php"><i class="icon-2x icon-signin"></i>Ingresar</a></li>
-			<li><a href="#"><i class="icon-2x icon-search"></i>Buscar</a>
-				<ul>
-					<li><a href="<?php echo ROOT_HTML; ?>"><i class="icon-search"></i>Libro</a></li>
-					<li><a href="<?php echo CONTROL_HTML.'/personas/buscar.php'; ?>"><i class="icon-search"></i>Persona</a></li>
-				</ul>
-			</li>
-			<li><a href="<?php echo ACERCA_HTML; ?>"><i class="icon-2x icon-info-sign"></i>Acerca</a></li>
-<?php
-}
-?>
+<?php endif; ?>
+			<!--<li><a href="<?php echo ACERCA_HTML; ?>"><i class="icon-2x icon-info-sign"></i>Acerca</a></li>-->
 		</ul>
 	</div>
 	<div class="col_3"></div>	
 <div class="grid">
 	<div class="col_3"></div>
 	<div class="col_6">
-<?php
-if(Sesion::existe('error')):
-?>
+<?php if(Sesion::existe('error')): ?>
 <div class="notice warning"><i class="icon-warning-sign icon-large"></i>
 	<strong><?php echo Sesion::getValor('error')['titulo']; ?>: </strong>
 	<?php echo Sesion::getValor('error')['descripcion']; ?>

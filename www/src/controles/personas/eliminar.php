@@ -14,7 +14,7 @@ if(Sesion::existe('usuario')){
 			Sesion::setValor('success', $warnings['ELIMINADO']);
 		else 
 			Sesion::setValor('error', $warnings['NO_ELIMINADO']);
-		header('Location: '.VISTAS_HTML.'/personas/buscar.php');		
+		header('Location: '.CONTROL_HTML.'/personas/buscar.php');		
 	}
 } else {
 	Sesion::setValor('error', $warnings['SIN_PERMISOS']);

@@ -59,6 +59,7 @@ $warnings = [
 	'CORRECTO' => ['titulo' => 'Correcto', 'descripcion' => '¡Datos agregados correctamente!'],
 	'DEVUELTO' => ['titulo' => 'Correcto', 'descripcion' => '¡El libro ha sido devuelto correctamente!'],
 	'SIN_PRESTAMO' => ['titulo' => 'Prestamo incorrecto', 'descripcion' => '¡El prestamo no se encuentra registrado!'],
+	'NO_PRESTAMO' => ['titulo' => 'No se puede prestar', 'descripcion' => '¡El prestamo no se puede realizar!'],
 	'SIN_PERMISOS' => ['titulo' => 'Sin permisos', 'descripcion' => '¡No tiene los permisos suficientes para realizar está acción!'],
 	'NO_ELIMINADO' => ['titulo' => 'Imposible eliminar', 'descripcion' => '¡No fue posible eliminar el libro de la base de datos!'],
 	'ELIMINADO' => ['titulo' => 'Eliminado', 'descripcion' => '¡Eliminado de la base de datos con éxito!'],

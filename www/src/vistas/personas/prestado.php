@@ -3,8 +3,8 @@
 <?php include_once HEADER_LY; ?>
 	<h3 class="center">Prestamo Realizado</h3>
 	<hr class="alt2" />
-	<div class="col_3"></div>
-	<div class="col_6">
+	<div class="col_2"></div>
+	<div class="col_8">
 		<fieldset>
 			<blockquote>
 				<p><strong>Número de Control: </strong><em><?php echo $prestamo['id']; ?></em></p>
@@ -15,10 +15,11 @@
 				<p><strong>Escrito por: </strong><em><?php echo $libro['autor']; ?></em></p>
 				<p><strong>Prestado por: </strong><em><?php echo $persona['nombres'].' '.$persona['apellidos']; ?></em></p>
 				<p><strong>Cédula: </strong><em><?php echo $persona['cedula']; ?></em></p>
+				<p><strong>Realizado por: </strong><em><?php echo Sesion::getValor('usuario')['nombres'].' '.Sesion::getValor('usuario')['apellidos']; ?></em></p>
 			</blockquote>
 		</fieldset>
 	</div>
-	<div class="col_3"></div>
+	<div class="col_2"></div>
 <?php include_once FOOTER_LY; ?>
 <?php else: ?>		
 	<div id="error_busqueda" class="notice error" style="display: none;"><i class="icon-error-sign icon-large"></i>

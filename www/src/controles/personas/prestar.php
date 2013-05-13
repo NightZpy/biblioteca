@@ -21,8 +21,8 @@ if(Sesion::existe('usuario')){
 					Sesion::setValor('error', $warnings['SUSPENDIDO']);
 					header('Location: '.VISTAS_HTML.'/libros/ver.php?id='.$_GET['libro']);
 				}
-				$strQuery = sprintf("INSERT INTO prestamos VALUES (default, %d, %d, CURDATE(), DATE_ADD(CURDATE(), INTERVAL %d DAY))", 
-									$persona, $_GET['libro'], TIEMPO_PRESTAMO);	
+				$strQuery = sprintf("INSERT INTO prestamos VALUES (default, %d, %d, %d, CURDATE(), DATE_ADD(CURDATE(), INTERVAL %d DAY), NULL)", 
+									$persona, Sesion::getValor('usuario')['id'], $_GET['libro'], TIEMPO_PRESTAMO);	
 				$resultados = $conexion->agregarRegistro($strQuery);		;
 				$prestamo = $conexion->ultimoID();
 				if($resultados and !empty($resultados)){
@@ -37,7 +37,10 @@ if(Sesion::existe('usuario')){
 					$persona = $resultados[0];
 
 					include_once VISTAS.DS.'personas'.DS.'prestado.php';
-				} 
+				} else {
+					Sesion::setValor('error', $warnings['NO_PRESTAMO']);
+					header('Location: '.CONTROL_HTML.'/libros/prestar.php?id='.$_GET['libro']);					
+				}
 				$conexion->cerrarConexion();				
 			} else {		
 				$error = true;
