@@ -12,9 +12,9 @@ if(Sesion::existe('usuario')){
 			$conexion = new Conexion($database);
 			$resultados = $conexion->seleccionarDatos($strQuery);	
 			if(count($resultados) > 0){
-				$persona = $resultados[0];
+				$persona = $resultados[0]['id'];
 				$strQuery = sprintf("SELECT p.id FROM personas p JOIN suspendidos s ON p.id=s.persona_id WHERE p.cedula='%s' AND s.hasta > CURDATE()", 
-					$_GET['cedula']);	
+					$_GET['cedula']);				
 				$conexion = new Conexion($database);
 				$resultados = $conexion->seleccionarDatos($strQuery);	
 				if(count($resultados) > 0){			

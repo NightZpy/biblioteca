@@ -18,7 +18,7 @@
 	<p><strong>Procedencia: </strong><em><?php echo $persona['procedencia']; ?></em></p>
 	<p><strong>Tipo: </strong><em><?php echo $persona['tipo']; ?></em></p>
 
-	<?php if(isset($prestamos) AND count($prestamos)>0): ?>
+	<?php if($prestamos AND isset($prestamos) AND is_array($prestamos) AND count($prestamos)>0): ?>
 	<h5 class="left">Prestamos realizados: </h5>	
 	<table cellspacing="0" cellpadding="0" class="sortable">
 		<thead>
@@ -60,7 +60,7 @@
 	</table>
 	<?php endif; ?>
 
-	<?php if($suspendidos AND isset($suspendidos) AND count($suspendidos)>0): ?>
+	<?php if($suspendidos AND isset($suspendidos) AND is_array($suspendidos) AND count($suspendidos)>0): ?>
 	<h5 class="left">Veces suspendido: </h5>	
 	<table cellspacing="0" cellpadding="0" class="sortable">
 		<thead>
