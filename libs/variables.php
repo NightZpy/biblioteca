@@ -42,6 +42,7 @@ define('IMAGES', ROOT_HTML.'/images');
 define('KICKSTART_CSS', CSS.'/kickstart.css');
 define('STYLE_CSS', CSS.'/style.css');
 define('KICKSTART_JS', JS.'/kickstart.js');
+define('MASKED_JS', JS.'/jquery.maskedinput.min.js');
 define('JQUERY', JS.'/jquery-1.9.1.min.js');
 define('SRC_HTML', ROOT_HTML.'/src');
 define('CONTROL_HTML', SRC_HTML.'/controles');
@@ -63,6 +64,9 @@ $warnings = [
 	'SIN_PERMISOS' => ['titulo' => 'Sin permisos', 'descripcion' => '¡No tiene los permisos suficientes para realizar está acción!'],
 	'NO_ELIMINADO' => ['titulo' => 'Imposible eliminar', 'descripcion' => '¡No fue posible eliminar el libro de la base de datos!'],
 	'ELIMINADO' => ['titulo' => 'Eliminado', 'descripcion' => '¡Eliminado de la base de datos con éxito!'],
+	'EXISTE' => ['titulo' => 'Ya existe', 'descripcion' => '¡Este título ya se encuentra registrado!'],
+	'NO_AGREGADO' => ['titulo' => 'Error registrando', 'descripcion' => '¡Imposible registrar!'],
+	'COTA_AGREGADA' => ['titulo' => 'Copia realizada', 'descripcion' => '¡La copia ha sido registrada correctamente!'],
 ];
 
 

@@ -11,8 +11,9 @@ if(isset($_GET) and !empty($_GET)){
 				WHERE '; 	
 	if(isset($_GET['id']) and !empty($_GET['id'])){
 		$strQuery .= 'l.id='.$_GET['id'];
-	} elseif (isset($_GET['cedula']) and !empty($_GET['cedula'])) {
-		$strQuery .= 'l.cedula='.$_GET['cedula'];
+	} elseif ((isset($_GET['cedula']) and !empty($_GET['cedula'])) and (isset($_GET['nacionalidad']) and !empty($_GET['nacionalidad']))) {
+		$strQuery .= 'l.nacionalidad="'.$_GET['nacionalidad'].'"';
+		$strQuery .= ' AND l.cedula='.$_GET['cedula'];
 	} else {
 		$error = true;
 	}
@@ -22,12 +23,22 @@ if(isset($_GET) and !empty($_GET)){
 		$resultados = $conexion->seleccionarDatos($strQuery);	
 		if(count($resultados)>0){
 			$persona = $resultados[0];
-			$strQuery = 'SELECT pr.id, pr.fecha_entrega, pr.fecha_prestamo, pr.fecha_entregado, l.titulo, l.codigo FROM prestamos pr JOIN libros l ON pr.libro_id=l.id WHERE pr.persona_id=';
+			$strQuery = 'SELECT pr.id, pr.fecha_entrega, pr.fecha_prestamo, pr.fecha_entregado, l.titulo, l.codigo, c.id AS cota
+						FROM prestamos pr
+						JOIN cotas c ON pr.cota_id = c.id
+						JOIN libros l ON c.libro_id = l.id
+						WHERE pr.persona_id =';
 			$strQuery .= $persona['id'];
 			$resultados = $conexion->seleccionarDatos($strQuery);
 			if(count($resultados)>0){
 				$prestamos = $resultados;
-				$strQuery = sprintf("SELECT l.titulo, s.desde, s.hasta FROM personas p JOIN suspendidos s ON p.id=s.persona_id JOIN libros l ON s.libro_id=l.id WHERE p.id=%d AND s.hasta > CURDATE()", $persona['id']);
+				$strQuery = sprintf("SELECT l.titulo, s.desde, s.hasta
+									FROM personas p
+									JOIN suspendidos s ON p.id = s.persona_id
+									JOIN cotas c ON s.cota_id = c.id
+									JOIN libros l ON c.libro_id = l.id
+									WHERE p.id =1
+									AND s.hasta > CURDATE( )", $persona['id']);
 				$resultados = $conexion->seleccionarDatos($strQuery);
 				if(count($resultados)>0)
 					$suspendidos = $resultados;

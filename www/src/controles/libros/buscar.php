@@ -2,7 +2,6 @@
 require_once '..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'libs'.DIRECTORY_SEPARATOR.'variables.php';
 require_once SESION;
 @Sesion::iniciarSesion();
-require_once CONEXION;
 $error = false;
 if(isset($_GET) and !empty($_GET)){
 	if(isset($_GET['chk_condicion']) and !empty($_GET['chk_condicion']) and $_GET['chk_condicion'] == 'on')
@@ -37,15 +36,16 @@ if(isset($_GET) and !empty($_GET)){
 			else
 				$strQuery .= " LOWER(editorial) LIKE LOWER('%".$_GET['editorial']."%')";
 
+	require_once CONEXION;
 	$conexion = new Conexion($database);
 	$resultados = $conexion->seleccionarDatos($strQuery);	
 	$conexion->cerrarConexion();
 
-	if($resultados and !empty($resultados))
+	if(count($resultados) > 0)
 		include_once VISTAS.DS.'libros'.DS.'lista.php';
 	else 
 		$error = true;
-
+	echo $strQuery;
 } else {
 	$error = true;
 }

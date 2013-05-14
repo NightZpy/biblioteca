@@ -26,6 +26,7 @@
 		<script type="text/javascript" src="<?php echo JQUERY; ?>"></script>
 		<script type="text/javascript" src="<?php echo KICKSTART_JS; ?>"></script> 	
 		<script src="<?php echo ZEBRA_JS; ?>/zebra_form.js"></script>
+		<script type="text/javascript" src="<?php echo MASKED_JS; ?>"></script> 
 	</head>
 <body class="background">
 	<div class="col_3"></div>
@@ -33,7 +34,7 @@
 	 	<ul class="menu center">
 			<li><a href="#"><i class="icon-2x icon-search"></i>Buscar</a>
 				<ul>
-					<li><a href="<?php echo CONTROL_HTML; ?>/libros/buscar.php"><i class="icon-search"></i>Libro</a></li>
+					<li><a href="<?php echo VISTAS_HTML; ?>/libros/buscar.php"><i class="icon-search"></i>Libro</a></li>
 					<li><a href="<?php echo CONTROL_HTML.'/personas/buscar.php'; ?>"><i class="icon-search"></i>Persona</a></li>
 				</ul>
 			</li>	 		

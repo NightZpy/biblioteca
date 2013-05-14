@@ -4,6 +4,7 @@
 	<strong><?php echo Sesion::getValor('suspendido')['titulo']; ?>: </strong>
 	<?php echo Sesion::getValor('suspendido')['descripcion']; ?>
 <a href="#close" class="icon-remove"></a></div>
+<?php Sesion::eliminar('suspendido') ?>
 <?php endif; ?>
 <?php if(isset($persona)): ?>
 <h3 class="center"><?php echo $persona['nombres'].' '.$persona['apellidos']?></h3>
@@ -25,6 +26,7 @@
 			<tr>
 				<th>Código</th>
 				<th>Título</th>
+				<th>Cota</th>
 				<th>Fecha de prestamo</th>
 				<th>Fecha de entrega</th>
 				<th>Se entrego el</th>
@@ -38,6 +40,7 @@
 			<tr>
 				<td><?php echo $prestamo['codigo']; ?></td>
 				<td><?php echo $prestamo['titulo']; ?></td>
+				<td>C-<?php echo $prestamo['cota']; ?></td>
 				<td><?php echo $prestamo['fecha_prestamo']; ?></td>
 				<td><?php echo $prestamo['fecha_entrega']; ?></td>
 				<th><?php echo ($prestamo['fecha_entregado'] == '' ? '¡No se ha entregado!' : $prestamo['fecha_entregado']); ?></th>
@@ -46,7 +49,7 @@
 				<?php if($prestamo['fecha_entregado'] != ''): ?>
 					<strong>Entregado</strong>
 				<?php else: ?>								
-					<a href="<?php echo CONTROL_HTML.'/personas/devolver.php?id='.$prestamo['id'].'&cedula='.$persona['cedula'];?>">
+					<a href="<?php echo CONTROL_HTML.'/personas/devolver.php?id='.$prestamo['id'].'&cedula='.$persona['cedula'].'&nacionalidad='.$persona['nacionalidad']?>">
 						<span class="tooltip" title="Devolver libro">
 							<i class="icon-2x icon-exchange"></i>
 						</span>
@@ -66,14 +69,14 @@
 		<thead>
 			<tr>
 				<th>Título</th>
-				<th>Desde/th>
+				<th>Desde</th>
 				<th>Hasta</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php foreach ($suspendidos as $suspendido): ?>
 			<tr>
-				<td><?php echo $suspendido['titulo']; ?></td>
+				<td><?php echo $suspendido['titulo'];?></td>
 				<td><?php echo $suspendido['desde']; ?></td>
 				<td><?php echo $suspendido['hasta']; ?></td>
 			</tr>

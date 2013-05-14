@@ -4,6 +4,12 @@ require_once SESION;
 @Sesion::iniciarSesion();
 include_once HEADER_LY;
 ?>
+<script>
+    jQuery(function($){
+        $("#telefono").mask("(999)9999999");
+        $("#movil").mask("(999)9999999");
+    });  
+</script>
 <h3 class="center">Agregar Persona</h3>
 <hr class="alt2" />
 <div class="col_5 column">

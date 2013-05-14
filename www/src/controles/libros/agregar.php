@@ -9,7 +9,7 @@ $conexion = new Conexion($database);
 $si = false;
 if(isset($_GET) && isset($_GET['id']) && is_numeric($_GET['id'])){
 	$resultados = $conexion->seleccionarDatos('SELECT l.id, l.titulo, l.autor, l.descripcion, l.codigo, 
-												l.editorial, l.fecha_ingreso, l.ejemplar, c.nombre AS categoria, c.id AS categoria_id
+												l.editorial, l.fecha_ingreso, c.nombre AS categoria, c.id AS categoria_id
 												FROM libros l JOIN categorias c ON l.categoria_id=c.id
 												WHERE l.id='.$_GET['id']);
 	if(count($resultados>0)){
@@ -25,7 +25,6 @@ if($si){
 	$autor = $libro['autor'];
 	$descripcion = $libro['descripcion'];
 	$editorial = $libro['editorial'];
-	$ejemplar = $libro['ejemplar'];
 	$fecha = $libro['fecha_ingreso'];
 	$categoria = $libro['categoria'];	
 	$categoria_id = $libro['categoria_id'];
@@ -36,7 +35,6 @@ if($si){
 	$autor = '';
 	$descripcion = '';
 	$editorial = '';
-	$ejemplar = 0;
 	$fecha = '';
 	$categoria = '';
 	$categoria_id = '';	
@@ -97,11 +95,6 @@ $obj->set_rule(array(
     'required'  =>  array('error', '¡El categoria del Libro es obligatorio!'),
 ));
 
-// Agrego el ejemplar del libro al formulario
-$form->add('label', 'label_ejemplar', 'ejemplar', 'Ejemplar:');
-$obj = $form->add('checkboxes', 'ejemplar', [ 'si' => 'Es ejemplar?' ], ['class' => 'checkbox']);
-$form->assign('ejemplar', $ejemplar);
-
  // "date"
 $form->add('label', 'label_fecha', 'fecha', 'Fecha de Ingreso:');
 $date = $form->add('date', 'fecha', $fecha);
@@ -109,20 +102,13 @@ $date->set_rule(array(
     'required'      =>  array('error', 'Date is required!'),
     'date'          =>  array('error', 'Date is invalid!'),
 ));
-
 // date format
 // don't forget to use $date->get_date() if the form is valid to get the date in YYYY-MM-DD format ready to be used
 // in a database or with PHP's strtotime function!
 $date->format('Y-m-d');
-
 // selectable dates are starting with the current day
 $date->direction(1);
-
 $form->add('note', 'note_date', 'date', 'El formato de la fecha es Y-m-d');
-
-
-
-
 // "submit"
 $form->add('submit', 'btnEnviar', 'Enviar');
 
@@ -131,17 +117,23 @@ if ($form->validate()) {
 		$conexion = new Conexion($database);
 		$id = $_POST['id'];
 		if(is_numeric($id)){	
-			$strQuery = "UPDATE libros SET codigo='%s', autor='%s', titulo='%s', descripcion='%s', editorial='%s', ejemplar=%d, fecha_ingreso='%s', categoria_id=%d WHERE id=$id";		
+			$strQuery = "UPDATE libros SET codigo='%s', autor='%s', titulo='%s', descripcion='%s', editorial='%s', fecha_ingreso='%s', categoria_id=%d WHERE id=$id";	
 		} else {
-			$strQuery = "INSERT INTO `libros`(`id`, `codigo`, `autor`, `titulo`, `descripcion`, `editorial`, `ejemplar`, `fecha_ingreso`, `categoria_id`) 
-					VALUES (default,'%s','%s','%s','%s','%s', %d, '%s', %d)";				
+			$strQuery = "SELECT id FROM libros WHERE codigo='%s'";
+			$strQuery = sprintf($strQuery, $_POST['codigo']);			
+			if(count($conexion->seleccionarDatos($strQuery)) > 0){
+				Sesion::setValor('error', $warnings['EXISTE']);
+				header('Location: '.CONTROL_HTML.'/libros/agregar.php');				
+			}
+			$strQuery = "INSERT INTO `libros`(`id`, `codigo`, `autor`, `titulo`, `descripcion`, `editorial`, `fecha_ingreso`, `categoria_id`) 
+					VALUES (default,'%s','%s','%s','%s','%s', '%s', %d)";				
 		}
-
-		$strQuery = sprintf($strQuery, $_POST['codigo'], $_POST['autor'], $_POST['titulo'], $_POST['descripcion'], $_POST['editorial'], 
-							(isset($_POST['ejemplar']) && $_POST['ejemplar'] == 'si' ? 1 : 0), $_POST['fecha'], $_POST['categoria']);
-		$conexion->agregarRegistro($strQuery);
-		$conexion->cerrarConexion();
-		Sesion::setValor('success', $warnings['CORRECTO']);
+		$strQuery = sprintf($strQuery, $_POST['codigo'], $_POST['autor'], $_POST['titulo'], $_POST['descripcion'], $_POST['editorial'], $_POST['fecha'], $_POST['categoria']);
+		if($conexion->agregarRegistro($strQuery))
+			Sesion::setValor('success', $warnings['CORRECTO']);
+		else 
+			Sesion::setValor('error', $warnings['NO_AGREGADO']);
+		$conexion->cerrarConexion();				
 		header('Location: '.CONTROL_HTML.'/libros/agregar.php');	
 	} else {
 		Sesion::setValor('error', $warnings['SIN_PERMISOS']);

@@ -67,6 +67,7 @@ $form->add('label', 'label_nombre', 'nombre', 'Nombres:');
 $obj = $form->add('text', 'nombre', $nombre);
 $obj->set_rule(array(
     'required'  =>  array('error', '¡El nombre de la persona es obligatorio!'),
+    'alphabet'  =>  array('error', '¡Sólo se permiten letras!'),
     'length' => [3, 50, 'error', 'La longitud mínima es de 3 y máxima es de 50 carácteres!', true]
 ));
 
@@ -75,6 +76,7 @@ $form->add('label', 'label_apellido', 'apellido', 'Apellidos:');
 $obj = $form->add('text', 'apellido', $apellido);
 $obj->set_rule(array(
     'required'  =>  array('error', '¡El apellido de la persona es obligatorio!'),
+    'alphabet'  =>  array('error', '¡Sólo se permiten letras!'),
     'length' => [3, 50, 'error', 'La longitud mínima es de 3 y máxima es de 50 carácteres!', true]
 ));
 

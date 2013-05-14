@@ -4,15 +4,20 @@ require_once SESION;
 @Sesion::iniciarSesion();
 include_once HEADER_LY;
 ?>
+<script>
+    jQuery(function($){
+        $("#movil").mask("(999)9999999");
+    });  
+</script>
 <h3 class="center">Agregar Usuario</h3>
 <hr class="alt2" />
 <div class="col_5 column">
     <fieldset><!-- things that need to be side-by-side go in "cells" -->
         <?php echo $label_usuario . $usuario?>
         <?php echo $label_password . $password?> 
-        <?php echo $label_nombre . $nombre?>
-        <?php echo $label_apellido . $apellido?>           
         <?php echo $label_cedula . $cedula?>
+        <?php echo $label_nombre . $nombre?>
+        <?php echo $label_apellido . $apellido?>                   
     </fieldset>
 </div>
 <div class="col_7 columns">

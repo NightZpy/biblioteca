@@ -13,26 +13,21 @@ include_once HEADER_LY;
         <?php echo $label_titulo . $titulo?>           
         <?php echo $label_autor . $autor?>
         <?php echo $label_editorial . $editorial?>
+        <br><br>
         <?php echo $label_categoria . $categoria?>        
     </fieldset>
 </div>    
 <div class="col_7 columns">
     <fieldset>
-        <?php echo $label_descripcion . $descripcion?>                       
-        
-        <div class="cell" style="">
-            <?php echo $label_ejemplar?>
-            <?php  echo str_replace('>', (($ejemplar == 1 ? 'checked>' : '>')), $ejemplar_si)?>
-            <?php echo $label_ejemplar_si?>
-        </div>
+        <?php echo $label_descripcion . $descripcion?>                                   
         <div class="clear"></div>
         <?php echo $label_fecha . $fecha . $note_date?>
         <!-- once we're done with "cells" we *must* place a "clear" div -->
         <div class="clear"></div>
         
-            <!-- the submit button goes in the last row; also, notice the "last" class which
-            removes the bottom border which is otherwise present for any row -->
-            <div class="row even last"><?php echo $btnEnviar?></div>
+        <!-- the submit button goes in the last row; also, notice the "last" class which
+        removes the bottom border which is otherwise present for any row -->
+        <div class="row even last"><?php echo $btnEnviar?></div>
     </fieldset>
 </div>
 <?php include_once FOOTER_LY; ?>

@@ -2,32 +2,50 @@
 require_once '..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'libs'.DIRECTORY_SEPARATOR.'variables.php';
 require_once SESION;
 @Sesion::iniciarSesion();
-require_once CONEXION;
 
-$error = false;
-if(isset($_GET) and !empty($_GET)){
-	$strQuery = 'SELECT l.id, l.titulo, l.autor, l.editorial, l.codigo, l.ejemplar, l.descripcion, l.fecha_ingreso, c.nombre AS categoria FROM libros l JOIN categorias c ON l.categoria_id=c.id WHERE l.id=';
+if(Sesion::existe('usuario')){	
+	$error = false;
+	if(isset($_GET) and !empty($_GET)){
+		$strQuery = 'SELECT l.id, l.titulo, l.autor, l.editorial, l.codigo, l.descripcion, l.fecha_ingreso, c.nombre AS categoria FROM libros l JOIN categorias c ON l.categoria_id=c.id WHERE l.id=';
 
-	if(isset($_GET['id']) and !empty($_GET['id'])){
-		$strQuery .= $_GET['id'];
-		$conexion = new Conexion($database);
-		$resultados = $conexion->seleccionarDatos($strQuery);	
-		$conexion->cerrarConexion();
-
-		if($resultados and !empty($resultados)){
-			$libro = $resultados[0];
-			include_once VISTAS.DS.'libros'.DS.'ver.php';
+		if(isset($_GET['libro_id']) and !empty($_GET['libro_id'])){
+			require_once CONEXION;
+			$strQuery .= $_GET['libro_id'];
+			$conexion = new Conexion($database);
+			$resultados = $conexion->seleccionarDatos($strQuery);				
+			if(count($resultados)>0){
+				$libro = $resultados[0];
+				$resultados = $conexion->seleccionarDatos("SELECT COUNT(*) AS cantidad FROM cotas WHERE libro_id=".$_GET['libro_id']);
+				if(count($resultados)>0)					
+					$copias = $resultados[0]['cantidad'];
+				else
+					$copias = 0;
+				$resultados = $conexion->seleccionarDatos("SELECT id FROM cotas WHERE disponible=1 AND libro_id=".$_GET['libro_id']);
+				if(count($resultados)>0){					
+					$copiasDisponibles = count($resultados);
+					$cotas = $resultados;
+				} else {
+					$copiasDisponibles = 0;
+					$cotas = false;					
+				}
+				$copiasPrestadas = $copias - $copiasDisponibles;
+				include_once VISTAS.DS.'libros'.DS.'ver.php';
+			} else {
+				$error = true;
+			}		
+			$conexion->cerrarConexion();
 		} else {
 			$error = true;
-		}		
+		}
 	} else {
 		$error = true;
+	}	
+
+	if($error){
+		Sesion::setValor('error', $warnings['VACIO']);
+		header('Location: '.VISTAS_HTML.'/libros/buscar.php');
 	}
 } else {
-	$error = true;
-}	
-
-if($error){
-	Sesion::setValor('error', $warnings['VACIO']);
-	header('Location: '.VISTAS_HTML.'/libros/buscar.php');
+	Sesion::setValors('error', $warnings['SIN_PERMISOS']);
+	header('Location: '.ROOT_HTML);		
 }

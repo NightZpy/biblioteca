@@ -12,6 +12,7 @@
 				<p><strong>Hasta él: </strong><em><?php echo $prestamo['fecha_entrega']; ?></em></p>
 				<p><strong>Título del Libro: </strong><em><?php echo $libro['titulo']; ?></em></p>
 				<p><strong>Código: </strong><em><?php echo $libro['codigo']; ?></em></p>
+				<p><strong>Cota: </strong><em>C-<?php echo $prestamo['cota_id']; ?></em></p>
 				<p><strong>Escrito por: </strong><em><?php echo $libro['autor']; ?></em></p>
 				<p><strong>Prestado por: </strong><em><?php echo $persona['nombres'].' '.$persona['apellidos']; ?></em></p>
 				<p><strong>Cédula: </strong><em><?php echo $persona['cedula']; ?></em></p>

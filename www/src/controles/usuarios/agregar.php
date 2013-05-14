@@ -47,30 +47,6 @@ $form = new Zebra_Form('form');
 $form->add('hidden', 'id', $id);
 
 // Agrego el cedula del usuario al formulario
-$form->add('label', 'label_cedula', 'cedula', 'Cédula:');
-$obj = $form->add('text', 'cedula', $cedula);
-$obj->set_rule(array(
-    'required'  =>  array('error', '¡La cédula de la usuario es obligatoria!'),
-    'digits'  =>  array('error', '¡Sólo se permiten valores númericos!'),
-    'length' => [4, 10, 'error', 'La longitud mínima es de 4 y máxima es de 10 carácteres!', true]
-));
-
-// Agrego el título del usuario al formulario
-$form->add('label', 'label_nombre', 'nombre', 'Nombres:');
-$obj = $form->add('text', 'nombre', $nombre);
-$obj->set_rule(array(
-    'required'  =>  array('error', '¡El nombre de la usuario es obligatorio!'),
-    'length' => [3, 50, 'error', 'La longitud mínima es de 3 y máxima es de 50 carácteres!', true]
-));
-
-// Agrego el apellido del usuario al formulario
-$form->add('label', 'label_apellido', 'apellido', 'Apellidos:');
-$obj = $form->add('text', 'apellido', $apellido);
-$obj->set_rule(array(
-    'required'  =>  array('error', '¡El apellido de la usuario es obligatorio!'),
-    'length' => [3, 50, 'error', 'La longitud mínima es de 3 y máxima es de 50 carácteres!', true]
-));
-
 $form->add('label', 'label_usuario', 'usuario', 'Usuario:');
 $obj = $form->add('text', 'usuario', $usuario_n);
 $obj->set_rule(array(
@@ -78,12 +54,38 @@ $obj->set_rule(array(
     'length' => [3, 50, 'error', 'La longitud mínima es de 3 y máxima es de 50 carácteres!', true]
 ));
 
-// Agrego el apellido del usuario al formulario
+// Agrego la contraseña del usuario al formulario
 $form->add('label', 'label_password', 'password', 'Contraseña:');
 $obj = $form->add('password', 'password');
 $obj->set_rule(array(
     'required'  =>  array('error', '¡La contraseña es obligatoria!'),
-    'length' => [3, 200, 'error', 'La longitud mínima es de 6 y máxima es de 200 carácteres!', true]
+    'length' => [3, 200, 'error', '¡La longitud mínima es de 6 y máxima es de 200 carácteres!', true]
+));
+
+// Agrego el apellido del usuario al formulario
+$form->add('label', 'label_apellido', 'apellido', 'Apellidos:');
+$obj = $form->add('text', 'apellido', $apellido);
+$obj->set_rule(array(
+    'required'  =>  array('error', '¡El apellido de la usuario es obligatorio!'),
+    'alphabet'  =>  array('error', '¡Sólo se permiten letras!'),
+    'length' => [3, 50, 'error', 'La longitud mínima es de 3 y máxima es de 50 carácteres!', true]
+));
+
+// Agrego el título del usuario al formulario
+$form->add('label', 'label_nombre', 'nombre', 'Nombres:');
+$obj = $form->add('text', 'nombre', $nombre);
+$obj->set_rule(array(
+    'required'  =>  array('error', '¡El nombre de la usuario es obligatorio!'),
+    'alphabet'  =>  array('error', '¡Sólo se permiten letras!'),
+    'length' => [3, 50, 'error', 'La longitud mínima es de 3 y máxima es de 50 carácteres!', true]
+));
+
+$form->add('label', 'label_cedula', 'cedula', 'Cédula:');
+$obj = $form->add('text', 'cedula', $cedula);
+$obj->set_rule(array(
+    'required'  =>  array('error', '¡La cédula de la usuario es obligatoria!'),
+    'digits'  =>  array('error', '¡Sólo se permiten valores númericos!'),
+    'length' => [4, 10, 'error', 'La longitud mínima es de 4 y máxima es de 10 carácteres!', true]
 ));
 
 $form->add('label', 'label_movil', 'movil', 'Móvil:');
