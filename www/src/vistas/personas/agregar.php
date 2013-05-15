@@ -10,8 +10,6 @@ include_once HEADER_LY;
         $("#movil").mask("(999)9999999");
     });  
 </script>
-<h3 class="center">Agregar Persona</h3>
-<hr class="alt2" />
 <div class="col_4 column">
         <!-- things that need to be side-by-side go in "cells" -->
     <fieldset>

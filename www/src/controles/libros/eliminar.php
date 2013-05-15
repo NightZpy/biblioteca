@@ -5,7 +5,7 @@ require_once SESION;
 if(Sesion::existe('usuario')){
 	require_once CONEXION;
 	$conexion = new Conexion($database);
-	$id = $_GET['id'];
+	$id = $_GET['libro_id'];
 	if(is_numeric($id)){	
 		$strQuery = "DELETE FROM libros WHERE id=$id";		
 		$resultado = $conexion->agregarRegistro($strQuery);
@@ -14,7 +14,7 @@ if(Sesion::existe('usuario')){
 			Sesion::setValor('success', $warnings['ELIMINADO']);
 		else 
 			Sesion::setValor('error', $warnings['NO_ELIMINADO']);
-		header('Location: '.VISTAS_HTML.'/libros/buscar.php');		
+		header('Location: '.CONTROL_HTML.'/libros/buscar.php');		
 	}
 } else {
 	Sesion::setValor('error', $warnings['SIN_PERMISOS']);

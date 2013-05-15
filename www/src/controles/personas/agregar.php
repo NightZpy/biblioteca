@@ -153,7 +153,7 @@ $form->add('submit', 'btnEnviar', 'Enviar');
 if ($form->validate()) {	
 	if(Sesion::existe('usuario')){
 		$conexion = new Conexion($database);
-		$id = $_POST['id'];
+		$id = $_GET['id'];
 		if(is_numeric($id)){	
 			$strQuery = "UPDATE personas SET cedula='%s', apellidos='%s', nombres='%s', nacionalidad='%s', email='%s', telefono=%d, movil='%s', tipo_persona_id=%d, direccion='%s', procedencia='%s' WHERE id=$id";		
 		} else {

@@ -9,8 +9,6 @@ include_once HEADER_LY;
         $("#movil").mask("(999)9999999");
     });  
 </script>
-<h3 class="center">Agregar Usuario</h3>
-<hr class="alt2" />
 <div class="col_4 column">
     <fieldset><!-- things that need to be side-by-side go in "cells" -->
         <div class="row"><?php echo $label_usuario . $usuario?></div>

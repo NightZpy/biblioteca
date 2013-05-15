@@ -3,8 +3,6 @@ if(Sesion::existe('usuario')): ?>
 <?php
 include_once HEADER_LY;
 ?>
-<h3 class="center">Buscar persona</h3>
-<hr class="alt2" />
 <div class="col_4"></div>
 <div class="col_4 column">
         <!-- things that need to be side-by-side go in "cells" -->

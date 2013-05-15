@@ -130,7 +130,7 @@ $form->add('submit', 'btnEnviar', 'Agregar');
 if ($form->validate()) {
 	if(Sesion::existe('usuario')){
 		$conexion = new Conexion($database);
-		$id = $_POST['id'];
+		$id = $_GET['libro_id'];
 		if(is_numeric($id)){	
 			$strQuery = "UPDATE libros SET codigo='%s', autor='%s', titulo='%s', descripcion='%s', editorial='%s', fecha_ingreso='%s', categoria_id=%d WHERE id=$id";	
 		} else {
