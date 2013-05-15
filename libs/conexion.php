@@ -95,12 +95,11 @@ class Conexion
             $i=0;
             $array = Array($cFilas);
 
-            while($tmpArray = mysql_fetch_array($result))
+            while($tmpArray = mysql_fetch_assoc($result))
             {
                 $array[$i] = $tmpArray;
                 $i++;
             }
-
             return $array;
         }
         return NULL;     

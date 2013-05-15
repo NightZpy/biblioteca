@@ -34,9 +34,16 @@ if(Sesion::existe('usuario')){
 							$strQuery = sprintf("SELECT l.* FROM libros l JOIN cotas c ON l.id=c.libro_id WHERE c.id=%d", $prestamo['cota_id']);
 							$resultados = $conexion->seleccionarDatos($strQuery);
 							$libro = $resultados[0];
-							$strQuery = sprintf("SELECT * FROM personas WHERE id=%d", $prestamo['persona_id']);
+							$strQuery = sprintf("SELECT p.*, t.nombre AS tipo FROM personas p JOIN tipo_personas t ON p.tipo_persona_id=t.id WHERE p.id=%d", $prestamo['persona_id']);
 							$resultados = $conexion->seleccionarDatos($strQuery);
 							$persona = $resultados[0];
+
+							$strQuery = "SELECT nombre FROM tipo_personas";
+							$resultados = $conexion->seleccionarDatos($strQuery);
+							if(count($resultados) > 0)
+								$tipoPersonas = $resultados;
+							else 
+								$tipoPersonas = false;
 							include_once VISTAS.DS.'personas'.DS.'prestado.php';
 						} else {
 							$error = true;
