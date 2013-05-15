@@ -29,6 +29,7 @@ if(isset($_GET) and !empty($_GET)){
 						JOIN libros l ON c.libro_id = l.id
 						WHERE pr.persona_id =';
 			$strQuery .= $persona['id'];
+			$suspendidos=false;
 			$resultados = $conexion->seleccionarDatos($strQuery);
 			if(count($resultados)>0){
 				$prestamos = $resultados;
@@ -39,12 +40,11 @@ if(isset($_GET) and !empty($_GET)){
 									JOIN libros l ON c.libro_id = l.id
 									WHERE p.id =1
 									AND s.hasta > CURDATE( )", $persona['id']);
-				$resultados = $conexion->seleccionarDatos($strQuery);
+				$resultados = $conexion->seleccionarDatos($strQuery);				
 				if(count($resultados)>0)
 					$suspendidos = $resultados;
 				else 
 					$suspendidos = false;
-
 			} else {
 				$prestamos = false;
 			}
