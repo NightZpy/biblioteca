@@ -28,7 +28,7 @@ if(Sesion::existe('usuario')){
 											$persona, Sesion::getValor('usuario')['id'], $_GET['cota'], TIEMPO_PRESTAMO);					
 						if($conexion->agregarRegistro($strQuery)){
 							$prestamo = $conexion->ultimoID();
-							$strQuery = sprintf("SELECT * FROM prestamos WHERE id=%d", $prestamo);
+							$strQuery = sprintf("SELECT p.*, c.nombre AS cota FROM prestamos p JOIN cotas c ON p.cota_id=c.id WHERE p.id=%d", $prestamo);
 							$resultados = $conexion->seleccionarDatos($strQuery);				
 							$prestamo = $resultados[0];
 							$strQuery = sprintf("SELECT l.* FROM libros l JOIN cotas c ON l.id=c.libro_id WHERE c.id=%d", $prestamo['cota_id']);

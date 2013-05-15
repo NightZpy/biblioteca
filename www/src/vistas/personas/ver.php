@@ -49,7 +49,7 @@
 				<?php if($prestamo['fecha_entregado'] != ''): ?>
 					<strong>Entregado</strong>
 				<?php else: ?>								
-					<a href="<?php echo CONTROL_HTML.'/personas/devolver.php?id='.$prestamo['id'].'&cedula='.$persona['cedula'].'&nacionalidad='.$persona['nacionalidad']?>">
+					<a href="<?php echo CONTROL_HTML.'/personas/devolver.php?prestamo_id='.$prestamo['id'].'&cota_id='.$prestamo['cota'].'&cedula='.$persona['cedula'].'&nacionalidad='.$persona['nacionalidad']?>">
 						<span class="tooltip" title="Devolver libro">
 							<i class="icon-2x icon-exchange"></i>
 						</span>

@@ -5,16 +5,19 @@ require_once SESION;
 if(Sesion::existe('usuario')){
 	$error = false;
 	if(isset($_GET) and !empty($_GET)){
-		if(isset($_GET['id']) && !empty($_GET['id'])){
+		if(isset($_GET['prestamo_id']) && !empty($_GET['prestamo_id'])){
 			//Devuelvo el libro poniendo la fecha en que se entrego
 			require_once CONEXION;
-			$strQuery = sprintf('UPDATE prestamos SET fecha_entregado=CURDATE() WHERE id=%d AND fecha_entregado IS NULL', $_GET['id']);
+			$strQuery = sprintf('UPDATE prestamos SET fecha_entregado=CURDATE() WHERE id=%d AND fecha_entregado IS NULL', $_GET['prestamo_id']);
 			$conexion = new Conexion($database);
 			$resultado = $conexion->actualizarDatos($strQuery);
 			if($resultado){
+				//Activo de nuevo la cota (copia del libro), para que pueda ser prestada de nuevo.
+				$strQuery = sprintf("UPDATE cotas SET disponible=1 WHERE id=%d", $_GET['cota_id']);
+				$conexion->actualizarDatos($strQuery);				
+
 				//verifico si entrego tarde y por tanto se suspende
-				$ultimoID = $conexion->ultimoID();
-				$strQuery = sprintf('SELECT * FROM prestamos WHERE id=%d AND fecha_entrega < fecha_entregado', $_GET['id']);
+				$strQuery = sprintf('SELECT * FROM prestamos WHERE id=%d AND fecha_entrega < fecha_entregado', $_GET['prestamo_id']);
 				$resultados = $conexion->seleccionarDatos($strQuery);
 				if(count($resultados)>0){
 					//se realiza la suspención

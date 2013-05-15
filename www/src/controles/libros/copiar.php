@@ -6,18 +6,27 @@ require_once SESION;
 if(Sesion::existe('usuario')){	
 	$error = false;
 	if(isset($_GET) and !empty($_GET)){
-		if(isset($_GET['id']) and !empty($_GET['id'])){
+		if(isset($_GET['libro_id']) and !empty($_GET['libro_id'])){
+			//verifico si el libro existe
 			require_once CONEXION;
-			$strQuery = "SELECT id FROM libros WHERE id=".$_GET['id'];
+			$strQuery = "SELECT id FROM libros WHERE id=".$_GET['libro_id'];
 			$conexion = new Conexion($database);	
 			if(count($conexion->seleccionarDatos($strQuery)) > 0){
-				$strQuery = sprintf("INSERT INTO cotas VALUES (default, %d, default)", $_GET['id']);
-				if($conexion->agregarRegistro($strQuery))
-					Sesion::setValor('success', $warnings['COTA_AGREGADA']);						
-				else
-					Sesion::setValor('error', $warnings['NO_AGREGADO']);
-				header('Location: '.CONTROL_HTML.'/libros/ver.php?libro_id='.$_GET['id']);	
-				$conexion->cerrarConexion();						
+				// Verifico la ultima cota guardada de este libro
+				$strQuery = "SELECT MAX(nombre) AS nombre FROM cotas WHERE libro_id=".$_GET['libro_id'];
+				$resultados = $conexion->seleccionarDatos($strQuery);
+				if(count($resultados) > 0){
+					$ultimaCota = $resultados[0]['nombre'] + 1;
+					//Guardo la nueva cota
+					$strQuery = sprintf("INSERT INTO cotas VALUES (default, %d, %d, default)", $ultimaCota, $_GET['libro_id']);
+					if($conexion->agregarRegistro($strQuery))
+						Sesion::setValor('success', $warnings['COTA_AGREGADA']);						
+					else
+						Sesion::setValor('error', $warnings['NO_AGREGADO']);
+					header('Location: '.CONTROL_HTML.'/libros/ver.php?libro_id='.$_GET['libro_id']);	
+				} else {
+					$error = true;
+				}										
 			} else {
 				$error = true;
 			}
@@ -31,7 +40,7 @@ if(Sesion::existe('usuario')){
 
 	if($error){
 		Sesion::setValor('error', $warnings['VACIO']);
-		header('Location: '.CONTROL_HTML.'/libros/ver.php?libro_id='.$_GET['id']);						
+		header('Location: '.CONTROL_HTML.'/libros/ver.php?libro_id='.$_GET['libro_id']);						
 	}
 } else {
 	Sesion::setValors('error', $warnings['SIN_PERMISOS']);

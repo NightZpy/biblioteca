@@ -11,29 +11,25 @@ include_once HEADER_LY;
 </script>
 <h3 class="center">Agregar Usuario</h3>
 <hr class="alt2" />
-<div class="col_5 column">
+<div class="col_4 column">
     <fieldset><!-- things that need to be side-by-side go in "cells" -->
-        <?php echo $label_usuario . $usuario?>
-        <?php echo $label_password . $password?> 
-        <?php echo $label_cedula . $cedula?>
-        <?php echo $label_nombre . $nombre?>
-        <?php echo $label_apellido . $apellido?>                   
+        <div class="row"><?php echo $label_usuario . $usuario?></div>
+        <div class="row"><?php echo $label_password . $password?></div>
+        <div class="row"><?php echo $label_cedula . $cedula?></div>
+        <div class="row"><?php echo $label_nombre . $nombre?></div>
+        <div class="row"><?php echo $label_apellido . $apellido?></div>
     </fieldset>
 </div>
-<div class="col_7 columns">
+<div class="col_2"></div>
+<div class="col_6 column">
     <fieldset>
-        <?php echo $label_email?>
-        <br>
-        <?php echo $email?>
-        <br>        
-        <?php echo $label_movil?>   
-        <br>
-        <?php echo $movil?> 
-        <br>
-        <?php echo $label_direccion . $direccion?>                           
+        <div class="row"><?php echo $label_email . $email?></div>
+        <div class="row"><?php echo $label_movil . $movil?></div>
+        <div class="row"><?php echo $label_direccion . $direccion?></div>
         <!-- the submit button goes in the last row; also, notice the "last" class which
         removes the bottom border which is otherwise present for any row -->
+        <div class="clear"></div>
         <div class="row even last"><?php echo $btnEnviar?></div>
     </fieldset>
 </div>
-<?php include_once FOOTER_LY; ?>s
+<?php include_once FOOTER_LY ?>

@@ -28,7 +28,7 @@
 					<p><strong>Seleccione la cota a prestar: </strong>
 					<select name="cota" id="cota">
 					<?php foreach ($cotas as $cota) : ?>
-						<option value="<?php echo $cota['id'] ?>">C-<?php echo $cota['id'] ?></option>
+						<option value="<?php echo $cota['id'] ?>">C-<?php echo $cota['nombre'] ?></option>
 					<?php endforeach; ?>		
 					</select>
 					</p>
@@ -38,7 +38,7 @@
 		<?php endif; ?>
 		<div class="clear"></div>
 		<br>
-		<a href="<?php echo CONTROL_HTML; ?>/libros/copiar.php?id=<?php echo $libro['id']; ?>">
+		<a href="<?php echo CONTROL_HTML; ?>/libros/copiar.php?libro_id=<?php echo $libro['id']; ?>">
 			<button class="large"><i class="icon-book"></i>Agregar Copia</button>
 		</a>	
 	<?php endif; ?>

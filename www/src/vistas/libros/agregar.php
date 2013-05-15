@@ -6,25 +6,22 @@ include_once HEADER_LY;
 ?>
 <h3 class="center">Agregar Libro</h3>
 <hr class="alt2" />
-<div class="col_5 column">
+<div class="col_4 column">
     <!-- things that need to be side-by-side go in "cells" -->
     <fieldset>
-        <?php echo $label_codigo . $codigo?>
-        <?php echo $label_titulo . $titulo?>           
-        <?php echo $label_autor . $autor?>
-        <?php echo $label_editorial . $editorial?>
-        <br><br>
-        <?php echo $label_categoria . $categoria?>        
+        <div class="row"><?php echo $label_codigo . $codigo?></div>
+        <div class="row"><?php echo $label_titulo . $titulo?></div>
+        <div class="row"><?php echo $label_autor . $autor?></div>
+        <div class="row"><?php echo $label_editorial . $editorial?></div>
+        <div class="row"><?php echo $label_categoria . $categoria?></div>    
     </fieldset>
-</div>    
-<div class="col_7 columns">
+</div> 
+<div class="col_2"></div>   
+<div class="col_6 column">
     <fieldset>
-        <?php echo $label_descripcion . $descripcion?>                                   
-        <div class="clear"></div>
-        <?php echo $label_fecha . $fecha . $note_date?>
-        <!-- once we're done with "cells" we *must* place a "clear" div -->
-        <div class="clear"></div>
-        
+        <div class="row"><?php echo $label_descripcion . $descripcion?></div>
+        <div class="row"><?php echo $label_fecha . $fecha . $note_date?></div> <!-- once we're done with "cells" we *must* place a "clear" div -->
+        <div class="clear"></div>        
         <!-- the submit button goes in the last row; also, notice the "last" class which
         removes the bottom border which is otherwise present for any row -->
         <div class="row even last"><?php echo $btnEnviar?></div>

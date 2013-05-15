@@ -49,6 +49,21 @@ $form->add('label', 'label_codigo', 'codigo', 'Código:');
 $obj = $form->add('text', 'codigo', $codigo);
 $obj->set_rule(array(
     'required'  =>  array('error', '¡El código del Libro es obligatorio!'),
+    'alphanumeric' =>  array('error', '¡Sólo se permiten letras y números!')
+));
+
+// Agrego el título del libro al formulario
+$form->add('label', 'label_titulo', 'titulo', 'Título:');
+$obj = $form->add('text', 'titulo', $titulo);
+$obj->set_rule(array(
+    'required'  =>  array('error', '¡El Título del Libro es obligatorio!'),
+));
+
+// Agrego el autor del libro al formulario
+$form->add('label', 'label_autor', 'autor', 'Autor:');
+$obj = $form->add('text', 'autor', $autor);
+$obj->set_rule(array(
+    'required'  =>  array('error', '¡El autor del Libro es obligatorio!'),
 ));
 
 // Agrego el título del libro al formulario
