@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 13-05-2013 a las 07:22:18
+-- Tiempo de generación: 15-05-2013 a las 10:18:44
 -- Versión del servidor: 5.5.29
 -- Versión de PHP: 5.4.12
 
@@ -43,6 +43,31 @@ INSERT INTO `categorias` (`id`, `nombre`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `cotas`
+--
+
+CREATE TABLE IF NOT EXISTS `cotas` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` int(10) unsigned NOT NULL DEFAULT '1' COMMENT 'Indicador de cota',
+  `libro_id` int(11) unsigned NOT NULL COMMENT 'codigo del libro al que pertenece la copia',
+  `disponible` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `codigo_libro` (`libro_id`),
+  KEY `disponible` (`disponible`),
+  KEY `nombre` (`nombre`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+
+--
+-- Volcado de datos para la tabla `cotas`
+--
+
+INSERT INTO `cotas` (`id`, `nombre`, `libro_id`, `disponible`) VALUES
+(1, 1, 7, 1),
+(22, 2, 7, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `libros`
 --
 
@@ -53,21 +78,20 @@ CREATE TABLE IF NOT EXISTS `libros` (
   `titulo` varchar(200) NOT NULL,
   `descripcion` text,
   `editorial` varchar(150) NOT NULL,
-  `ejemplar` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Saber si es el original o una copia',
   `fecha_ingreso` date NOT NULL COMMENT 'Fecha en que fue recibido el libro en la biblioteca',
-  `categoria_id` int(10) unsigned NOT NULL COMMENT 'Código asociado a la categoría perteneciente al libro',
+  `categoria_id` int(10) unsigned DEFAULT NULL COMMENT 'Código asociado a la categoría perteneciente al libro',
   PRIMARY KEY (`id`),
   UNIQUE KEY `codigo` (`codigo`),
+  UNIQUE KEY `codigo_2` (`codigo`),
   KEY `categoria_id` (`categoria_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `libros`
 --
 
-INSERT INTO `libros` (`id`, `codigo`, `autor`, `titulo`, `descripcion`, `editorial`, `ejemplar`, `fecha_ingreso`, `categoria_id`) VALUES
-(3, 'axcdeg', 'José', 'Geometria ', 'Calculos y representación geometrica', 'Santillana', 1, '2013-05-30', 1),
-(6, '1234', 'Heinzh Dietrich', 'Aviones', 'asdfasdfasdfasdfasdfasdf', 'Tech', 1, '2013-05-15', 1);
+INSERT INTO `libros` (`id`, `codigo`, `autor`, `titulo`, `descripcion`, `editorial`, `fecha_ingreso`, `categoria_id`) VALUES
+(7, 'a2c3d4D', 'Alguien', 'Matematica Divertida', 'sdfasdfasdf', 'Santillana', '2013-05-24', 1);
 
 -- --------------------------------------------------------
 
@@ -109,26 +133,18 @@ INSERT INTO `personas` (`id`, `nombres`, `apellidos`, `cedula`, `nacionalidad`, 
 
 CREATE TABLE IF NOT EXISTS `prestamos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `persona_id` int(10) unsigned NOT NULL COMMENT 'Id asociado al estudiante que realizó el prestamo',
-  `usuario_id` int(10) unsigned NOT NULL COMMENT 'Identificador del usuario que aprueba el prestamo',
-  `libro_id` int(10) unsigned NOT NULL COMMENT 'Id asociado al libro prestado',
+  `persona_id` int(10) unsigned DEFAULT NULL COMMENT 'Id asociado al estudiante que realizó el prestamo',
+  `usuario_id` int(10) unsigned DEFAULT NULL COMMENT 'Identificador del usuario que aprueba el prestamo',
+  `cota_id` int(10) unsigned DEFAULT NULL COMMENT 'Id asociado al libro prestado',
   `fecha_prestamo` date NOT NULL COMMENT 'Fecha en que se sede el libro en calidad de prestamo',
   `fecha_entrega` date NOT NULL COMMENT 'Fecha en que se recibe el libro',
   `fecha_entregado` date DEFAULT NULL COMMENT 'Fecha en que es devuelto el libro',
   PRIMARY KEY (`id`),
-  KEY `libro_id` (`libro_id`),
+  KEY `libro_id` (`cota_id`),
   KEY `usuario_id_2` (`usuario_id`),
-  KEY `libro_id_2` (`libro_id`),
-  KEY `prestamos_ibfk_4` (`persona_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
-
---
--- Volcado de datos para la tabla `prestamos`
---
-
-INSERT INTO `prestamos` (`id`, `persona_id`, `usuario_id`, `libro_id`, `fecha_prestamo`, `fecha_entrega`, `fecha_entregado`) VALUES
-(26, 1, 1, 3, '2013-05-13', '2013-05-14', NULL),
-(28, 2, 1, 6, '2013-05-13', '2013-05-14', NULL);
+  KEY `libro_id_2` (`cota_id`),
+  KEY `persona_id` (`persona_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=159 ;
 
 -- --------------------------------------------------------
 
@@ -138,14 +154,14 @@ INSERT INTO `prestamos` (`id`, `persona_id`, `usuario_id`, `libro_id`, `fecha_pr
 
 CREATE TABLE IF NOT EXISTS `suspendidos` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `libro_id` int(10) unsigned NOT NULL COMMENT 'Id asociado al libro por el cual se suspende',
-  `persona_id` int(10) unsigned NOT NULL COMMENT 'Id asociado al estudiante que ha sido suspendido del servicio ',
+  `cota_id` int(10) unsigned DEFAULT NULL COMMENT 'Id asociado al libro por el cual se suspende',
+  `persona_id` int(10) unsigned DEFAULT NULL COMMENT 'Id asociado al estudiante que ha sido suspendido del servicio ',
   `desde` date NOT NULL COMMENT 'Fecha desde la cuál se suspende',
   `hasta` date NOT NULL COMMENT 'Fecha hasta la que permanecerá suspendido el estudiante',
   PRIMARY KEY (`id`),
-  KEY `libro_id` (`libro_id`,`persona_id`),
+  KEY `libro_id` (`cota_id`,`persona_id`),
   KEY `usuario_id` (`persona_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -203,10 +219,16 @@ INSERT INTO `usuarios` (`id`, `usuario`, `password`, `cedula`, `nombres`, `apell
 --
 
 --
+-- Filtros para la tabla `cotas`
+--
+ALTER TABLE `cotas`
+  ADD CONSTRAINT `cotas_ibfk_1` FOREIGN KEY (`libro_id`) REFERENCES `libros` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `libros`
 --
 ALTER TABLE `libros`
-  ADD CONSTRAINT `libros_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `libros_ibfk_2` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `personas`
@@ -218,16 +240,16 @@ ALTER TABLE `personas`
 -- Filtros para la tabla `prestamos`
 --
 ALTER TABLE `prestamos`
-  ADD CONSTRAINT `prestamos_ibfk_6` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `prestamos_ibfk_4` FOREIGN KEY (`persona_id`) REFERENCES `personas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `prestamos_ibfk_5` FOREIGN KEY (`libro_id`) REFERENCES `libros` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `prestamos_ibfk_14` FOREIGN KEY (`cota_id`) REFERENCES `cotas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `prestamos_ibfk_12` FOREIGN KEY (`persona_id`) REFERENCES `personas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `prestamos_ibfk_13` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `suspendidos`
 --
 ALTER TABLE `suspendidos`
-  ADD CONSTRAINT `suspendidos_ibfk_3` FOREIGN KEY (`persona_id`) REFERENCES `personas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `suspendidos_ibfk_2` FOREIGN KEY (`libro_id`) REFERENCES `libros` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `suspendidos_ibfk_9` FOREIGN KEY (`persona_id`) REFERENCES `personas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `suspendidos_ibfk_8` FOREIGN KEY (`cota_id`) REFERENCES `cotas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
