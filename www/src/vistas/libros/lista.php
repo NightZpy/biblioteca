@@ -2,7 +2,7 @@
 if(isset($resultados)){
 ?>
 <?php include_once HEADER_LY; ?>
-<h3 class="center">Buscar Libro</h3>
+<h3 class="center">Lista de Libros</h3>
 <hr class="alt2" />
 
 <fieldset>

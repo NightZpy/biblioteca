@@ -1,4 +1,3 @@
-			</div> 
 		</div> 
 		<div class="col_3"></div>
 		<div class="clear"></div>

@@ -25,13 +25,12 @@
 			<form action="<?php echo CONTROL_HTML; ?>/libros/prestar.php" method="get">
 				<fieldset>
 					<input type="hidden" name="libro_id" value="<?php echo $libro['id'] ?>">
-					<p><strong>Seleccione la cota a prestar: </strong>
+					<strong>Seleccione la cota a prestar: </strong>
 					<select name="cota" id="cota">
 					<?php foreach ($cotas as $cota) : ?>
 						<option value="<?php echo $cota['id'] ?>">C-<?php echo $cota['nombre'] ?></option>
 					<?php endforeach; ?>		
 					</select>
-					</p>
 					<button type="submit" class="large"><i class="icon-briefcase"></i>Prestar</button>
 				</fieldset>
 			</form>

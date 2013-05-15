@@ -1,4 +1,3 @@
-<?php @Sesion::iniciarSesion(); ?>
 <!doctype html>
 <html lang="<?php echo IDIOMA; ?>">
 	<head>
@@ -63,7 +62,7 @@
 			</ul>
 		</div>
 		<div class="col_3"></div>	
-	<div class="grid">
+		<div class="clear"></div>
 		<div class="col_3"></div>
 		<div class="col_6">
 	<?php if(Sesion::existe('error')): ?>

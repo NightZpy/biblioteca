@@ -1,8 +1,6 @@
 <?php
 if(Sesion::existe('usuario')): ?>
 	<?php include_once HEADER_LY; ?>
-	<h3 class="center ocultar">Prestamo Realizado</h3>
-	<hr class="alt2" />
 	<fieldset class="borde">
 		<div class="col_8" style="border: 2px solid black">
 			<div class="col_12"></div>
@@ -64,6 +62,8 @@ if(Sesion::existe('usuario')): ?>
 			</div>
 		</div>
 	</fieldset>
+	<a class="ocultar" target="_BLANK" href="<?php echo CONTROL_HTML ?>/personas/prestado_pdf.php?prestamo_id=<?php echo $prestamo['id'] ?>"><button class="large"><i class="icon-download"></i>Generar PDF</button></a>
+	<button class="large ocultar" onclick="window.print();"><i class="icon-print ocultar"></i>IMPRIMIR</button>
 <?php include_once FOOTER_LY; ?>
 <?php else: ?>		
 	<div id="error_busqueda" class="notice error" style="display: none;"><i class="icon-error-sign icon-large"></i>

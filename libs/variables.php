@@ -14,6 +14,10 @@ define('LIBS', ROOT.DS.'libs');
 define('TMP', ROOT.DS.'tmp');
 define('SADO_CACHE', TMP.DS.'sado'.DS.'cache');
 define('CONEXION', LIBS.DS.'conexion.php');
+define('HTML2PDF', LIBS.DS.'html2pdf');
+define('HTML2PDF_CLASS', HTML2PDF.DS.'html2pdf.class.php');
+define('DOMPDF', LIBS.DS.'dompdf');
+define('DOMPDF_CLASS', DOMPDF.DS.'dompdf_config.inc.php');
 define('ARRAY_CONTROL', LIBS.DS.'array_control.php');
 define('ARREGLO', LIBS.DS.'arreglo.php');
 define('FECHA', LIBS.DS.'fecha.php');
@@ -61,6 +65,7 @@ $warnings = [
 	'DEVUELTO' => ['titulo' => 'Correcto', 'descripcion' => '¡El libro ha sido devuelto correctamente!'],
 	'SIN_PRESTAMO' => ['titulo' => 'Prestamo incorrecto', 'descripcion' => '¡El prestamo no se encuentra registrado!'],
 	'NO_PRESTAMO' => ['titulo' => 'No se puede prestar', 'descripcion' => '¡El prestamo no se puede realizar!'],
+	'NO_PDF' => ['titulo' => 'NO GENERADO', 'descripcion' => '¡NO SE PUEDE GENERAR EL PDF!'],
 	'SIN_PERMISOS' => ['titulo' => 'Sin permisos', 'descripcion' => '¡No tiene los permisos suficientes para realizar está acción!'],
 	'NO_ELIMINADO' => ['titulo' => 'Imposible eliminar', 'descripcion' => '¡No fue posible eliminar el libro de la base de datos!'],
 	'ELIMINADO' => ['titulo' => 'Eliminado', 'descripcion' => '¡Eliminado de la base de datos con éxito!'],

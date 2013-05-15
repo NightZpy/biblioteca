@@ -58,36 +58,35 @@ include_once HEADER_LY;
 	<strong>Error enviando: </strong>
 	debe seleccionar aunque sea una opción de búsqueda.
 <a href="#close" class="icon-remove"></a></div>
-<h3 class="center">Buscar Libro</h3>
-<hr class="alt2" />
-
-<div class="col_4 columns">
-	<fieldset>
-		<legend class="large"><i class="icon-2x icon-filter"></i>Filtro</legend>
-		<input id="chk_condicion" class="checkbox" type="checkbox" name="chk_condicion">
-		<label class="inline" for="chk_condicion">¿Se deben cumplir todas las condiciones?</label>			
-		<br>
-		<input id="chk_codigo" class="checkbox" type="checkbox" name="chk_codigo">
-		<label class="inline" for="chk_codigo">Código</label>
-		<br>		
-		<input id="chk_autor" class="checkbox" type="checkbox" name="chk_autor">
-		<label class="inline" for="chk_autor">Autor</label>
-		<br>
-		<input id="chk_titulo" class="checkbox" type="checkbox" name="chk_titulo">
-		<label class="inline" for="chk_titulo">Título</label>
-		<br>
-		<input id="chk_editorial" class="checkbox" type="checkbox" name="chk_editorial">
-		<label class="inline" for="chk_editorial">Editorial</label>	
-	</fieldset>
-</div>
-<div class="col_1"></div>
-<div class="col_7">
-	<fieldset>
-        <div class="row"><?php echo $label_codigo . $codigo?></div>
-		<div class="row"><?php echo $label_titulo . $titulo?></div>
-		<div class="row"><?php echo $label_autor . $autor?></div>
-		<div class="row"><?php echo $label_editorial . $editorial?></div> 
-		<div class="row even last"><?php echo $btnEnviar?></div>		
-	</fieldset>
-</div>
+	<div class="col_2"></div>
+	<div class="col_8">
+		<fieldset>
+			<legend>Buscar Libro <i class="icon-2x icon-filter"></i></legend>		
+			<div class="col_4 column">
+					<input id="chk_condicion" class="checkbox" type="checkbox" name="chk_condicion">
+					<label class="inline" for="chk_condicion">¿Se deben cumplir todas las condiciones?</label>			
+					<br>
+					<input id="chk_codigo" class="checkbox" type="checkbox" name="chk_codigo">
+					<label class="inline" for="chk_codigo">Código</label>
+					<br>		
+					<input id="chk_autor" class="checkbox" type="checkbox" name="chk_autor">
+					<label class="inline" for="chk_autor">Autor</label>
+					<br>
+					<input id="chk_titulo" class="checkbox" type="checkbox" name="chk_titulo">
+					<label class="inline" for="chk_titulo">Título</label>
+					<br>
+					<input id="chk_editorial" class="checkbox" type="checkbox" name="chk_editorial">
+					<label class="inline" for="chk_editorial">Editorial</label>	
+			</div>
+			<div class="col_2"></div>
+			<div class="col_6">
+			        <div class="row"><?php echo $label_codigo . $codigo?></div>
+					<div class="row"><?php echo $label_titulo . $titulo?></div>
+					<div class="row"><?php echo $label_autor . $autor?></div>
+					<div class="row"><?php echo $label_editorial . $editorial?></div> 
+					<div class="row even last"><?php echo $btnEnviar?></div>		
+			</div>		
+		</fieldset>
+	</div>	
+	<div class="col_2"></div>
 <?php include_once FOOTER_LY; ?>

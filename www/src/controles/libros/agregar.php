@@ -7,11 +7,11 @@ require_once ZEBRA_FORM;
 
 $conexion = new Conexion($database);
 $si = false;
-if(isset($_GET) && isset($_GET['id']) && is_numeric($_GET['id'])){
+if(isset($_GET) && isset($_GET['libro_id']) && is_numeric($_GET['libro_id'])){
 	$resultados = $conexion->seleccionarDatos('SELECT l.id, l.titulo, l.autor, l.descripcion, l.codigo, 
 												l.editorial, l.fecha_ingreso, c.nombre AS categoria, c.id AS categoria_id
 												FROM libros l JOIN categorias c ON l.categoria_id=c.id
-												WHERE l.id='.$_GET['id']);
+												WHERE l.id='.$_GET['libro_id']);
 	if(count($resultados>0)){
 		$libro = $resultados[0];
 		$si = true;
