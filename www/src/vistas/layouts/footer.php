@@ -2,7 +2,7 @@
 		</div> 
 		<div class="col_3"></div>
 		<div class="clear"></div>
-		<div id="footer">
+		<div id="footer" class ="ocultar">
 			© Copyright 2013 Todos los derechos reservados. Sitio web realizado por: <em><?php echo AUTOR; ?></em>
 		</div>
 	</body>

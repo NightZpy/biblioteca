@@ -1,9 +1,9 @@
 <?php
-	if(Sesion::existe('usuario')): ?>
-<?php include_once HEADER_LY; ?>
-	<h3 class="center">Prestamo Realizado</h3>
+if(Sesion::existe('usuario')): ?>
+	<?php include_once HEADER_LY; ?>
+	<h3 class="center ocultar">Prestamo Realizado</h3>
 	<hr class="alt2" />
-	<fieldset>
+	<fieldset class="borde">
 		<div class="col_8" style="border: 2px solid black">
 			<div class="col_12"></div>
 			<div class="clear"></div>
@@ -59,7 +59,7 @@
 					<p><strong>Código: </strong><em><?php echo $libro['codigo']; ?></em></p>				
 				</div>
 				<div class="row" style="border-bottom: 1px solid black">
-					<p><strong>Autorizado por: </strong><em><?php echo Sesion::getValor('usuario')['nombres'].' '.Sesion::getValor('usuario')['apellidos'] ?></em></p>
+					<p><strong>Autorizado por: </strong><em><?php echo $prestamo['nombre_usuario'].' '.$prestamo['apellido_usuario'] ?></em></p>
 				</div>
 			</div>
 		</div>

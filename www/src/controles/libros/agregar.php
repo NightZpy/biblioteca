@@ -107,15 +107,15 @@ $form->add('label', 'label_categoria', 'categoria', 'Categoria:');
 $obj = $form->add('select', 'categoria', $categoria_id);
 $obj->add_options($categorias);
 $obj->set_rule(array(
-    'required'  =>  array('error', '¡El categoria del Libro es obligatorio!'),
+    'required'  =>  array('error', '¡El categoria del Libro es obligatorio!')
 ));
 
  // "date"
 $form->add('label', 'label_fecha', 'fecha', 'Fecha de Ingreso:');
 $date = $form->add('date', 'fecha', $fecha);
 $date->set_rule(array(
-    'required'      =>  array('error', 'Date is required!'),
-    'date'          =>  array('error', 'Date is invalid!'),
+    'required'      =>  array('error', '¡La fecha de ingreso del libro es obligatoria!'),
+    'date'          =>  array('error', '¡La fecha es inválida!')
 ));
 // date format
 // don't forget to use $date->get_date() if the form is valid to get the date in YYYY-MM-DD format ready to be used
@@ -125,7 +125,7 @@ $date->format('Y-m-d');
 $date->direction(1);
 $form->add('note', 'note_date', 'date', 'El formato de la fecha es Y-m-d');
 // "submit"
-$form->add('submit', 'btnEnviar', 'Enviar');
+$form->add('submit', 'btnEnviar', 'Agregar');
 
 if ($form->validate()) {
 	if(Sesion::existe('usuario')){

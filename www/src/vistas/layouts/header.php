@@ -21,6 +21,12 @@
 			}
 		</style>
 
+		<style media='print'>
+			.ocultar { display: none; }
+			.borde { border: 1px solid black;}
+			.center .centrar {}
+		</style>		
+
 		<script type="text/javascript" src="<?php echo JQUERY; ?>"></script>
 		<script type="text/javascript" src="<?php echo KICKSTART_JS; ?>"></script> 	
 		<script src="<?php echo ZEBRA_JS; ?>/zebra_form.js"></script>
@@ -28,7 +34,7 @@
 	</head>
 	<body class="background">
 		<div class="col_3"></div>
-		<div class="col_6">
+		<div class="col_6 ocultar">
 		 	<ul class="menu center">
 				<li><a href="#"><i class="icon-2x icon-search"></i>Buscar</a>
 					<ul>
@@ -45,7 +51,8 @@
 						<li><a href="<?php echo CONTROL_HTML.'/personas/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Persona</a></li>
 						<li><a href="<?php echo CONTROL_HTML.'/usuarios/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Usuario</a></li>
 					</ul>
-				</li>			
+				</li>	
+				<li><a href="<?php echo CONTROL_HTML.'/libros/reporte_prestamos.php'; ?>"><i class="icon-search"></i>Consultar Prestamos</a></li>		
 				<li><a href="<?php echo CONTROL_HTML.'/usuarios/salir.php'; ?>"><i class="icon-2x icon-signout"></i>Salir</a></li>
 	<?php
 	else :
