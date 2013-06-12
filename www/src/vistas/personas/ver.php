@@ -9,7 +9,7 @@
 <?php if(isset($persona)): ?>
 <h3 class="center"><?php echo $persona['nombres'].' '.$persona['apellidos']?></h3>
 <hr class="alt2" />
-<legend>
+<fieldset class='borde'>
 	<p><strong>Nacionalidad: </strong><em><?php echo $persona['nacionalidad']; ?></em></p>
 	<p><strong>Cédula: </strong><em><?php echo $persona['cedula']; ?></em></p>
 	<p><strong>Email: </strong><em><?php echo ($persona['email'] == 1 ? 'Si.' : 'No.'); ?></em></p>
@@ -24,32 +24,32 @@
 	<table cellspacing="0" cellpadding="0" class="sortable">
 		<thead>
 			<tr>
-				<th>Código</th>
+				<th>ISBN</th>
 				<th>Título</th>
-				<th>Cota</th>
+				<th>Ejemplar</th>
 				<th>Fecha de prestamo</th>
-				<th>Fecha de entrega</th>
+				<th  class='ocultar'>Fecha de entrega</th>
 				<th>Se entrego el</th>
 				<?php if(Sesion::existe('usuario')): ?>	
-				<th>Acciones</th>
+				<th class='ocultar'>Acciones</th>
 				<?php endif; ?>	
 			</tr>
 		</thead>
 		<tbody>
 			<?php foreach ($prestamos as $prestamo): ?>
 			<tr>
-				<td><?php echo $prestamo['codigo']; ?></td>
+				<td><?php echo $prestamo['isbn']; ?></td>
 				<td><?php echo $prestamo['titulo']; ?></td>
-				<td>C-<?php echo $prestamo['cota']; ?></td>
+				<td>E-<?php echo $prestamo['ejemplar']; ?></td>
 				<td><?php echo $prestamo['fecha_prestamo']; ?></td>
-				<td><?php echo $prestamo['fecha_entrega']; ?></td>
-				<th><?php echo ($prestamo['fecha_entregado'] == '' ? '¡No se ha entregado!' : $prestamo['fecha_entregado']); ?></th>
+				<td class='ocultar'><?php echo $prestamo['fecha_entrega']; ?></td>
+				<td><?php echo ($prestamo['fecha_entregado'] == '' ? '¡No se ha entregado!' : $prestamo['fecha_entregado']); ?></th>
 				<?php if(Sesion::existe('usuario')): ?>	
-				<td>
+				<td class='ocultar'>
 				<?php if($prestamo['fecha_entregado'] != ''): ?>
 					<strong>Entregado</strong>
 				<?php else: ?>								
-					<a href="<?php echo CONTROL_HTML.'/personas/devolver.php?prestamo_id='.$prestamo['id'].'&cota_id='.$prestamo['cota'].'&cedula='.$persona['cedula'].'&nacionalidad='.$persona['nacionalidad']?>">
+					<a href="<?php echo CONTROL_HTML.'/personas/devolver.php?prestamo_id='.$prestamo['id'].'&ejemplar_id='.$prestamo['ejemplar'].'&cedula='.$persona['cedula'].'&nacionalidad='.$persona['nacionalidad']?>">
 						<span class="tooltip" title="Devolver libro">
 							<i class="icon-2x icon-exchange"></i>
 						</span>
@@ -85,6 +85,7 @@
 	</table>
 	<?php endif; ?>
 		
-</legend>
+</fieldset>
+<button class="large ocultar" onclick="window.print();"><i class="icon-print ocultar"></i>IMPRIMIR</button>
 <?php endif; ?>
 <?php include_once FOOTER_LY; ?>

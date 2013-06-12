@@ -38,12 +38,12 @@
 				<li><a href="#"><i class="icon-2x icon-search"></i>Buscar</a>
 					<ul>
 						<li><a href="<?php echo CONTROL_HTML; ?>/libros/buscar.php"><i class="icon-search"></i>Libro</a></li>
+						<?php if (Sesion::existe('usuario')) : ?>	
 						<li><a href="<?php echo CONTROL_HTML.'/personas/buscar.php'; ?>"><i class="icon-search"></i>Persona</a></li>
+						<?php endif; ?>
 					</ul>
 				</li>	 		
-	<?php
-	if (Sesion::existe('usuario')) :
-	?>	
+	<?php if (Sesion::existe('usuario')) : ?>	
 				<li><a href="#"><i class="icon-2x icon-plus"></i>Agregar</a>
 					<ul>
 						<?php if (Sesion::getValor('usuario')['tipo_usuario'] === 'Admin') : ?>

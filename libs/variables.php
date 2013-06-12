@@ -31,8 +31,8 @@ define('ZEBRA_FORM', LIBS.DS.'Zebra'.DS.'Zebra_Form.php');
 define('TITULO', 'Administración Bibliotecaria');
 define('IDIOMA', 'es');
 define('AUTOR', '');
-define('TIEMPO_PRESTAMO', 1);
-define('TIEMPO_SUSPENSION', 30);
+define('TIEMPO_PRESTAMO', 2);
+define('TIEMPO_SUSPENSION', 0);
 
 
 //Para enlaces y recursos del lado cliente
@@ -78,7 +78,7 @@ $warnings = [
 //Variables
 $database = [
 	'usuario' => 'root',
-	'password' => '18990567',
+	'password' => 'root',
 	'host' => 'localhost',
 	'db' => 'biblioteca'
 ];

@@ -12,18 +12,18 @@ if(Sesion::existe('usuario')){
 			$conexion = new Conexion($database);
 			$resultado = $conexion->actualizarDatos($strQuery);
 			if($resultado){
-				//Activo de nuevo la cota (copia del libro), para que pueda ser prestada de nuevo.
-				$strQuery = sprintf("UPDATE cotas SET disponible=1 WHERE id=%d", $_GET['cota_id']);
+				//Activo de nuevo la ejemplar (copia del libro), para que pueda ser prestada de nuevo.
+				$strQuery = sprintf("UPDATE ejemplares SET disponible=1 WHERE id=%d", $_GET['ejemplar_id']);
 				$conexion->actualizarDatos($strQuery);				
 
 				//verifico si entrego tarde y por tanto se suspende
-				$strQuery = sprintf('SELECT * FROM prestamos WHERE id=%d AND fecha_entrega < fecha_entregado', $_GET['prestamo_id']);
+				/*$strQuery = sprintf('SELECT * FROM prestamos WHERE id=%d AND fecha_entrega < fecha_entregado', $_GET['prestamo_id']);
 				$resultados = $conexion->seleccionarDatos($strQuery);
 				if(count($resultados)>0){
 					//se realiza la suspención
 					$prestamo = $resultados[0];
-					$strQuery = sprintf('INSERT INTO `suspendidos`(`id`, `cota_id`, `persona_id`, `desde`, `hasta`) 
-										VALUES (default, %d, %d, CURDATE(), DATE_ADD(CURDATE(), INTERVAL %d DAY))', $prestamo['cota_id'], $prestamo['persona_id'], TIEMPO_SUSPENSION);									
+					$strQuery = sprintf('INSERT INTO `suspendidos`(`id`, `ejemplar_id`, `persona_id`, `desde`, `hasta`) 
+										VALUES (default, %d, %d, CURDATE(), DATE_ADD(CURDATE(), INTERVAL %d DAY))', $prestamo['ejemplar_id'], $prestamo['persona_id'], TIEMPO_SUSPENSION);									
 					$resultado = $conexion->agregarRegistro($strQuery);
 					if($resultado){
 						Sesion::setValor('suspendido', $warnings['SUSPENDIDO']);	
@@ -33,7 +33,8 @@ if(Sesion::existe('usuario')){
 					}
 				} else {
 					Sesion::setValor('success', $warnings['DEVUELTO']);
-				}
+				}*/
+				Sesion::setValor('success', $warnings['DEVUELTO']);
 			} else {
 				$error = true;
 			}

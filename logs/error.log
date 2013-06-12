@@ -404,3 +404,5 @@ pm_winnt:notice] [pid 9940:tid 704] AH00354: Child: Starting 64 worker threads.
 [Sun Jun 09 20:25:39.438053 2013] [core:notice] [pid 284:tid 392] AH00094: Command line: 'C:\\BitNami\\WAMPST~1\\apache2\\bin\\httpd.exe -d C:/BitNami/wampstack/apache2 -f C:\\BitNami\\WAMPST~1\\apache2\\conf\\httpd.conf'
 [Sun Jun 09 20:25:40.483255 2013] [mpm_winnt:notice] [pid 284:tid 392] AH00418: Parent: Created child process 2948
 [Sun Jun 09 20:25:45.069663 2013] [mpm_winnt:notice] [pid 2948:tid 288] AH00354: Child: Starting 64 worker threads.
+[Wed Jun 12 13:53:29.413535 2013] [mpm_prefork:notice] [pid 8137] AH00163: Apache/2.4.4 (Unix) OpenSSL/1.0.1e PHP/5.4.15 configured -- resuming normal operations
+[Wed Jun 12 13:53:29.459924 2013] [core:notice] [pid 8137] AH00094: Command line: '/home/usuario/lampstack/apache2/bin/httpd -f /home/usuario/lampstack/apache2/conf/httpd.conf'

@@ -23,9 +23,9 @@ if(isset($_GET) and !empty($_GET)){
 		$resultados = $conexion->seleccionarDatos($strQuery);	
 		if(count($resultados)>0){
 			$persona = $resultados[0];
-			$strQuery = 'SELECT pr.id, pr.fecha_entrega, pr.fecha_prestamo, pr.fecha_entregado, l.titulo, l.codigo, c.id AS cota
+			$strQuery = 'SELECT pr.id, pr.fecha_entrega, pr.fecha_prestamo, pr.fecha_entregado, l.titulo, l.isbn, c.id AS ejemplar
 						FROM prestamos pr
-						JOIN cotas c ON pr.cota_id = c.id
+						JOIN ejemplares c ON pr.ejemplar_id = c.id
 						JOIN libros l ON c.libro_id = l.id
 						WHERE pr.persona_id =';
 			$strQuery .= $persona['id'];
@@ -36,7 +36,7 @@ if(isset($_GET) and !empty($_GET)){
 				$strQuery = sprintf("SELECT l.titulo, s.desde, s.hasta
 									FROM personas p
 									JOIN suspendidos s ON p.id = s.persona_id
-									JOIN cotas c ON s.cota_id = c.id
+									JOIN ejemplares c ON s.ejemplar_id = c.id
 									JOIN libros l ON c.libro_id = l.id
 									WHERE p.id =1
 									AND s.hasta > CURDATE( )", $persona['id']);
