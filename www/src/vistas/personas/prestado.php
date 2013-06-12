@@ -44,7 +44,8 @@ if(Sesion::existe('usuario')): ?>
 		<div class="col_12">
 			<div class="col_4" style="border: 2px solid black">
 				<h4 class="center"><strong>COTA</strong></h4>
-				<h5 class="center"><em>C-<?php echo $prestamo['cota'] ?></em></h5>
+				<h5 class="center"><em><?php echo $libro['cota'] ?></em></h5>
+				<h5 class="center"><em>E-<?php echo $prestamo['ejemplar'] ?></em></h5>
 			</div>
 			<div class="col_8">
 				<div class="row" style="border-bottom: 1px solid black">

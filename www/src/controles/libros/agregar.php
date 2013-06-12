@@ -8,7 +8,7 @@ require_once ZEBRA_FORM;
 $conexion = new Conexion($database);
 $si = false;
 if(isset($_GET) && isset($_GET['libro_id']) && is_numeric($_GET['libro_id'])){
-	$resultados = $conexion->seleccionarDatos('SELECT l.id, l.titulo, l.autor, l.descripcion, l.codigo, 
+	$resultados = $conexion->seleccionarDatos('SELECT l.id, l.titulo, l.autor, l.descripcion, l.isbn, 
 												l.editorial, l.fecha_ingreso, c.nombre AS categoria, c.id AS categoria_id
 												FROM libros l JOIN categorias c ON l.categoria_id=c.id
 												WHERE l.id='.$_GET['libro_id']);
@@ -20,7 +20,8 @@ if(isset($_GET) && isset($_GET['libro_id']) && is_numeric($_GET['libro_id'])){
 
 if($si){
 	$id = $libro['id'];
-	$codigo = $libro['codigo'];
+	$isbn = $libro['isbn'];
+	$cota = $libro['cota'];
 	$titulo = $libro['titulo'];
 	$autor = $libro['autor'];
 	$descripcion = $libro['descripcion'];
@@ -30,7 +31,8 @@ if($si){
 	$categoria_id = $libro['categoria_id'];
 } else {
 	$id = '';
-	$codigo = '';
+	$isbn = '';
+	$cota = '';
 	$titulo = '';
 	$autor = '';
 	$descripcion = '';
@@ -44,11 +46,19 @@ $form = new Zebra_Form('form');
 
 $form->add('hidden', 'id', $id);
 
-// Agrego el codigo del libro al formulario
-$form->add('label', 'label_codigo', 'codigo', 'Código:');
-$obj = $form->add('text', 'codigo', $codigo);
+// Agrego el isbn del libro al formulario
+$form->add('label', 'label_isbn', 'isbn', 'ISBN:');
+$obj = $form->add('text', 'isbn', $isbn);
 $obj->set_rule(array(
-    'required'  =>  array('error', '¡El código del Libro es obligatorio!'),
+    'required'  =>  array('error', '¡El ISBN del Libro es obligatorio!'),
+    'alphanumeric' =>  array('error', '¡Sólo se permiten letras y números!')
+));
+
+// Agrego el isbn del libro al formulario
+$form->add('label', 'label_cota', 'cota', 'cota:');
+$obj = $form->add('text', 'cota', $cota);
+$obj->set_rule(array(
+    'required'  =>  array('error', '¡La cota del Libro es obligatorio!'),
     'alphanumeric' =>  array('error', '¡Sólo se permiten letras y números!')
 ));
 
@@ -132,18 +142,18 @@ if ($form->validate()) {
 		$conexion = new Conexion($database);
 		$id = $_GET['libro_id'];
 		if(is_numeric($id)){	
-			$strQuery = "UPDATE libros SET codigo='%s', autor='%s', titulo='%s', descripcion='%s', editorial='%s', fecha_ingreso='%s', categoria_id=%d WHERE id=$id";	
+			$strQuery = "UPDATE libros SET isbn='%s', autor='%s', titulo='%s', descripcion='%s', editorial='%s', fecha_ingreso='%s', cota='%s', categoria_id=%d WHERE id=$id";	
 		} else {
-			$strQuery = "SELECT id FROM libros WHERE codigo='%s'";
-			$strQuery = sprintf($strQuery, $_POST['codigo']);			
+			$strQuery = "SELECT id FROM libros WHERE isbn='%s'";
+			$strQuery = sprintf($strQuery, $_POST['isbn']);			
 			if(count($conexion->seleccionarDatos($strQuery)) > 0){
 				Sesion::setValor('error', $warnings['EXISTE']);
 				header('Location: '.CONTROL_HTML.'/libros/agregar.php');				
 			}
-			$strQuery = "INSERT INTO `libros`(`id`, `codigo`, `autor`, `titulo`, `descripcion`, `editorial`, `fecha_ingreso`, `categoria_id`) 
-					VALUES (default,'%s','%s','%s','%s','%s', '%s', %d)";				
+			$strQuery = "INSERT INTO `libros`(`id`, `isbn`, `autor`, `titulo`, `descripcion`, `editorial`, `fecha_ingreso`, cota, `categoria_id`) 
+					VALUES (default,'%s','%s','%s','%s','%s', '%s', '%s', %d)";				
 		}
-		$strQuery = sprintf($strQuery, $_POST['codigo'], $_POST['autor'], $_POST['titulo'], $_POST['descripcion'], $_POST['editorial'], $_POST['fecha'], $_POST['categoria']);
+		$strQuery = sprintf($strQuery, $_POST['isbn'], $_POST['autor'], $_POST['titulo'], $_POST['descripcion'], $_POST['editorial'], $_POST['fecha'], $_POST['cota'], $_POST['categoria']);
 		if($conexion->agregarRegistro($strQuery))
 			Sesion::setValor('success', $warnings['CORRECTO']);
 		else 

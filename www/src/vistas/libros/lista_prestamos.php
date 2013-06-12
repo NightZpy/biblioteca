@@ -31,10 +31,10 @@ require_once SESION;
 	<table id="data" cellpadding="0" cellspacing="0" border="0" class="display">
 		<thead>
 			<tr>
-				<th>Código</th>
+				<th>ISBN</th>
 				<th>Autor</th>
 				<th>Título</th>
-				<th>Cota</th>
+				<th>Ejemplar</th>
 				<th>Autorizado por</th>
 				<th>Prestado por</th>
 				<th>Fecha Prestamo</th>
@@ -45,10 +45,10 @@ require_once SESION;
 		<tbody class="odd gradeX">
 			<?php foreach ($prestamos as $prestamo): ?>
 			<tr>
-				<td><?php echo $prestamo['codigo']; ?></td>
+				<td><?php echo $prestamo['isbn']; ?></td>
 				<td><?php echo $prestamo['autor']; ?></td>
 				<td><?php echo $prestamo['titulo']; ?></td>
-				<td>C-<?php echo $prestamo['cota']; ?></td>
+				<td>E-<?php echo $prestamo['ejemplar']; ?></td>
 				<td><?php echo $prestamo['usuario']; ?></td>
 				<td><?php echo $prestamo['persona']; ?></td>	
 				<td><?php echo $prestamo['fecha_prestamo']; ?></td>
@@ -56,22 +56,10 @@ require_once SESION;
 				<td><?php echo ($prestamo['fecha_entregado'] != '' ? $prestamo['fecha_entregado'] : 'Sin entregar'); ?></td>									
 			</tr>
 			<?php endforeach; ?>
-		</tbody>
-		<tfood>
-			<tr>
-				<th>Código</th>
-				<th>Autor</th>
-				<th>Título</th>
-				<th>Cota</th>
-				<th>Autorizado por</th>
-				<th>Prestado por</th>
-				<th>Fecha Prestamo</th>
-				<th>Fecha a entregar</th>
-				<th>Fecha entregado</th>				
-			</tr>
-		</tfood>		
+		</tbody>		
 	</table>
 </fieldset>
+<button class="large ocultar" onclick="window.print();"><i class="icon-print ocultar"></i>IMPRIMIR</button>
 <?php include_once FOOTER_LY; ?>	
 <?php else: ?>
 <?php	

@@ -9,7 +9,7 @@ if(isset($resultados)){
 	<table cellspacing="0" cellpadding="0" class="sortable">
 		<thead>
 			<tr>
-				<th>Código</th>
+				<th>ISBN</th>
 				<th>Autor</th>
 				<th>Título</th>
 				<th>Descripción</th>
@@ -20,7 +20,7 @@ if(isset($resultados)){
 		<tbody>
 			<?php foreach ($resultados as $valor): ?>
 			<tr>
-				<td><?php echo $valor['codigo']; ?></td>
+				<td><?php echo $valor['isbn']; ?></td>
 				<td><?php echo $valor['autor']; ?></td>
 				<td><?php echo $valor['titulo']; ?></td>
 				<td><?php echo $valor['descripcion']; ?></td>

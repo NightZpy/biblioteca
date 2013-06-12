@@ -5,7 +5,7 @@ require_once SESION;
 
 $error = false;
 if(isset($_GET) and !empty($_GET)){
-	$strQuery = 'SELECT l.id, l.titulo, l.autor, l.editorial, l.codigo, l.descripcion, l.fecha_ingreso, c.nombre AS categoria FROM libros l JOIN categorias c ON l.categoria_id=c.id WHERE l.id=';
+	$strQuery = 'SELECT l.id, l.titulo, l.autor, l.editorial, l.isbn, l.descripcion, l.fecha_ingreso, c.nombre AS categoria FROM libros l JOIN categorias c ON l.categoria_id=c.id WHERE l.id=';
 
 	if(isset($_GET['libro_id']) and !empty($_GET['libro_id'])){
 		require_once CONEXION;
@@ -14,20 +14,20 @@ if(isset($_GET) and !empty($_GET)){
 		$resultados = $conexion->seleccionarDatos($strQuery);				
 		if(count($resultados)>0){
 			$libro = $resultados[0];
-			$resultados = $conexion->seleccionarDatos("SELECT COUNT(*) AS cantidad FROM cotas WHERE libro_id=".$_GET['libro_id']);
+			$resultados = $conexion->seleccionarDatos("SELECT COUNT(*) AS cantidad FROM ejemplares WHERE libro_id=".$_GET['libro_id']);
 			if(count($resultados)>0)					
 				$copias = $resultados[0]['cantidad'];
 			else
 				$copias = 0;
-			$resultados = $conexion->seleccionarDatos("SELECT id, nombre FROM cotas WHERE disponible=1 AND libro_id=".$_GET['libro_id']);
+			$resultados = $conexion->seleccionarDatos("SELECT id, nombre FROM ejemplares WHERE disponible=1 AND libro_id=".$_GET['libro_id']);
 			if(count($resultados)>0){					
-				$copiasDisponibles = count($resultados);
-				$cotas = $resultados;
+				$ejemplaresDisponibles = count($resultados);
+				$ejemplares = $resultados;
 			} else {
-				$copiasDisponibles = 0;
-				$cotas = false;					
+				$ejemplaresDisponibles = 0;
+				$ejemplares = false;					
 			}
-			$copiasPrestadas = $copias - $copiasDisponibles;
+			$ejemplaresPrestadas = $copias - $ejemplaresDisponibles;
 			include_once VISTAS.DS.'libros'.DS.'ver.php';
 		} else {
 			$error = true;

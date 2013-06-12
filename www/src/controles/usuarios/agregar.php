@@ -26,6 +26,7 @@ if($si){
 	$cedula = $usuario['cedula'];
 	$nombre = $usuario['nombres'];
 	$apellido = $usuario['apellidos'];
+	$tipo_usuario_id = $usuario['tipo_usuario_id'];
 	$email = $usuario['email'];
 	$movil = $usuario['movil'];
 	$direccion = $usuario['direccion'];
@@ -36,6 +37,7 @@ if($si){
 	$cedula = '';
 	$nombre = '';
 	$apellido = '';
+	$tipoUsuario = '';
 	$email = '';
 	$movil = '';
 	$direccion = '';
@@ -69,6 +71,23 @@ $obj->set_rule(array(
     'required'  =>  array('error', '¡El apellido de la usuario es obligatorio!'),
     'alphabet'  =>  array('error', '¡Sólo se permiten letras!'),
     'length' => [3, 50, 'error', 'La longitud mínima es de 3 y máxima es de 50 carácteres!', true]
+));
+
+// Agrego el tipo de usuario al formulario
+$resultados = $conexion->seleccionarDatos('SELECT * FROM tipo_usuarios');
+foreach ($resultados as $rs) {
+	$tipoUsuarios[$rs['id']] = $rs['nombre'];
+}
+$conexion->cerrarConexion();
+
+$form->add('label', 'label_tipo_usuario', 'tipo_usuario', 'Tipos de Usuario:');
+if(isset($tipo_usuario_id))
+	$obj = $form->add('select', 'tipo_usuario', $tipo_usuario_id);
+else
+	$obj = $form->add('select', 'tipo_usuario');
+$obj->add_options($tipoUsuarios);
+$obj->set_rule(array(
+    'required'  =>  array('error', '¡El Tipo de Usuario es obligatorio!')
 ));
 
 // Agrego el título del usuario al formulario
@@ -119,14 +138,14 @@ if ($form->validate()) {
 		$conexion = new Conexion($database);
 		$id = $_POST['id'];
 		if(is_numeric($id)){	
-			$strQuery = "UPDATE usuarios SET usuario='%s', password='%s',  cedula='%s', apellidos='%s', nombres='%s', email='%s', movil='%s', direccion='%s' WHERE id=$id";	
+			$strQuery = "UPDATE usuarios SET usuario='%s', password='%s',  cedula='%s', apellidos='%s', nombres='%s', email='%s', movil='%s', direccion='%s', tipo_usuario_id=%d WHERE id=$id";	
 		} else {
-			$strQuery = "INSERT INTO `usuarios`(`id`, usuario, password, `cedula`, `apellidos`, `nombres`, `email`, `movil`, direccion) 
-					VALUES (default,'%s','%s','%s','%s','%s', '%s', '%s', '%s')";				
+			$strQuery = "INSERT INTO `usuarios`(`id`, usuario, password, `cedula`, `apellidos`, `nombres`, `email`, `movil`, direccion, tipo_usuario_id) 
+					VALUES (default,'%s','%s','%s','%s','%s', '%s', '%s', '%s', %d)";				
 		}
 
 		$strQuery = sprintf($strQuery, $_POST['usuario'], md5($_POST['password']), $_POST['cedula'], $_POST['apellido'], $_POST['nombre'], $_POST['email'], 
-							$_POST['movil'], $_POST['direccion']);
+							$_POST['movil'], $_POST['direccion'], $_POST['tipo_usuario']);
 
 		$conexion->agregarRegistro($strQuery);
 		$conexion->cerrarConexion();

@@ -16,6 +16,7 @@ include_once HEADER_LY;
         <div class="row"><?php echo $label_cedula . $cedula?></div>
         <div class="row"><?php echo $label_nombre . $nombre?></div>
         <div class="row"><?php echo $label_apellido . $apellido?></div>
+        <div class="row"><?php echo $label_tipo_usuario . $tipo_usuario?></div>
     </fieldset>
 </div>
 <div class="col_2"></div>

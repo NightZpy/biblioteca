@@ -6,16 +6,16 @@ include_once HEADER_LY;
 ?>
 <script>
 	$(document).ready(function(){  	  
-		$("#codigo").attr('disabled','disabled');
+		$("#isbn").attr('disabled','disabled');
 		$("#autor").attr('disabled','disabled');		
 		$("#titulo").attr('disabled','disabled');
 		$("#editorial").attr('disabled','disabled');
 
-	    $("#chk_codigo").click(function() {  
-	        if($("#chk_codigo").is(':checked')) {  
-	            $("#codigo").removeAttr('disabled');
+	    $("#chk_isbn").click(function() {  
+	        if($("#chk_isbn").is(':checked')) {  
+	            $("#isbn").removeAttr('disabled');
 	        } else {  
-	            $("#codigo").attr('disabled','disabled');
+	            $("#isbn").attr('disabled','disabled');
 	        }  
 	    });  
 
@@ -44,7 +44,7 @@ include_once HEADER_LY;
 	    });	    
 
 	    $("#frmBusqueda").submit(function() {
-			if((!$("#chk_codigo").is(':checked') && !$("#chk_autor").is(':checked') && 
+			if((!$("#chk_isbn").is(':checked') && !$("#chk_autor").is(':checked') && 
 				!$("#chk_titulo").is(':checked') && !$("#chk_editorial").is(':checked'))){
 					$("#error_busqueda").show("slow");
 					return false;
@@ -65,8 +65,8 @@ include_once HEADER_LY;
 					<input id="chk_condicion" class="checkbox" type="checkbox" name="chk_condicion">
 					<label class="inline" for="chk_condicion">¿Se deben cumplir todas las condiciones?</label>			
 					<br>
-					<input id="chk_codigo" class="checkbox" type="checkbox" name="chk_codigo">
-					<label class="inline" for="chk_codigo">Código</label>
+					<input id="chk_isbn" class="checkbox" type="checkbox" name="chk_isbn">
+					<label class="inline" for="chk_isbn">ISBN</label>
 					<br>		
 					<input id="chk_autor" class="checkbox" type="checkbox" name="chk_autor">
 					<label class="inline" for="chk_autor">Autor</label>
@@ -81,7 +81,7 @@ include_once HEADER_LY;
 			<div class="col_2"></div>
 			<div class="col_6">
 		        <fieldset>
-		        	<div class="row"><?php echo $label_codigo . $codigo?></div>
+		        	<div class="row"><?php echo $label_isbn . $isbn?></div>
 					<div class="row"><?php echo $label_titulo . $titulo?></div>
 					<div class="row"><?php echo $label_autor . $autor?></div>
 					<div class="row"><?php echo $label_editorial . $editorial?></div> 

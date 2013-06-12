@@ -46,9 +46,12 @@
 	?>	
 				<li><a href="#"><i class="icon-2x icon-plus"></i>Agregar</a>
 					<ul>
-						<li><a href="<?php echo CONTROL_HTML.'/libros/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Libro</a></li>
-						<li><a href="<?php echo CONTROL_HTML.'/personas/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Persona</a></li>
-						<li><a href="<?php echo CONTROL_HTML.'/usuarios/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Usuario</a></li>
+						<?php if (Sesion::getValor('usuario')['tipo_usuario'] === 'Admin') : ?>
+							<li><a href="<?php echo CONTROL_HTML.'/libros/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Libro</a></li>
+							<li><a href="<?php echo CONTROL_HTML.'/usuarios/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Usuario</a></li>
+						<?php endif; ?>
+						<li><a href="<?php echo CONTROL_HTML.'/personas/agregar.php'; ?>"><i class="icon-plus"></i>Agregar Persona</a></li>	
+						
 					</ul>
 				</li>	
 				<li><a href="<?php echo CONTROL_HTML.'/libros/reporte_prestamos.php'; ?>"><i class="icon-search"></i>Consultar Prestamos</a></li>		

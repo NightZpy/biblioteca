@@ -44,11 +44,11 @@ if(Sesion::existe('usuario')){
 
 	if ($form->validate()) {
 		require_once CONEXION;
-		$strQuery = sprintf("SELECT pr.fecha_entrega, pr.fecha_prestamo, pr.fecha_entregado, CONCAT(u.nombres, '  ', u.apellidos) AS usuario, CONCAT(p.nombres, '  ', p.apellidos) AS persona, c.nombre AS cota, l.autor, l.titulo, l.codigo 
+		$strQuery = sprintf("SELECT pr.fecha_entrega, pr.fecha_prestamo, pr.fecha_entregado, CONCAT(u.nombres, '  ', u.apellidos) AS usuario, CONCAT(p.nombres, '  ', p.apellidos) AS persona, c.nombre AS ejemplar, l.autor, l.titulo, l.isbn 
 							FROM prestamos pr 
 							JOIN personas p ON pr.persona_id=p.id 
 							JOIN usuarios u ON pr.usuario_id=u.id 
-							JOIN cotas c ON pr.cota_id=c.id
+							JOIN ejemplares c ON pr.ejemplar_id=c.id
 							JOIN libros l ON c.libro_id=l.id
 							WHERE pr.fecha_prestamo BETWEEN '%s' AND '%s' ORDER BY pr.fecha_prestamo ASC", $_GET['fecha_inicio'], $_GET['fecha_fin']);
 		$conexion = new Conexion($database);

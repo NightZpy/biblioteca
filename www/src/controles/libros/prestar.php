@@ -8,8 +8,8 @@ if(Sesion::existe('usuario')){
 	$error = false;
 	if(isset($_GET) and !empty($_GET)){
 		//me aseguro que los parametros necesarios llegan 
-		if((isset($_GET['libro_id']) and !empty($_GET['libro_id'])) and (isset($_GET['cota']) and !empty($_GET['cota']))){
-			$strQuery = sprintf('SELECT id FROM cotas WHERE id=%d and libro_id=%d and disponible=1', $_GET['cota'], $_GET['libro_id']);
+		if((isset($_GET['libro_id']) and !empty($_GET['libro_id'])) and (isset($_GET['ejemplar']) and !empty($_GET['ejemplar']))){
+			$strQuery = sprintf('SELECT id FROM ejemplares WHERE id=%d and libro_id=%d and disponible=1', $_GET['ejemplar'], $_GET['libro_id']);
 			require_once CONEXION;
 			$conexion = new Conexion($database);			
 			if(count($conexion->seleccionarDatos($strQuery)) > 0){								
@@ -18,7 +18,7 @@ if(Sesion::existe('usuario')){
 
 				$form->add('hidden', 'libro_id', $libro['id']);
 				$form->assign('libro', $libro);
-				$form->add('hidden', 'cota', $_GET['cota']);
+				$form->add('hidden', 'ejemplar', $_GET['ejemplar']);
 
 				// Agrego el cedula del usuario al formulario
 				$form->add('label', 'label_cedula', 'cedula', 'Cédula:');
@@ -45,7 +45,7 @@ if(Sesion::existe('usuario')){
 				$form->add('submit', 'btnEnviar', 'Buscar');
 
 				if ($form->validate()) {
-					header('Location: '.CONTROL_HTML.'/personas/prestar.php?libro_id='.$_GET['libro_id'].'&cota='.$_GET['cota'].'&cedula='.$_GET['cedula']);	
+					header('Location: '.CONTROL_HTML.'/personas/prestar.php?libro_id='.$_GET['libro_id'].'&ejemplar='.$_GET['ejemplar'].'&cedula='.$_GET['cedula']);	
 				} else {					
 				    $form->render(VISTAS.DS.'personas'.DS.'prestar.php');
 				}

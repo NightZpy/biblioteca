@@ -13,12 +13,12 @@ if(Sesion::existe('usuario')){
 			$conexion = new Conexion($database);	
 			if(count($conexion->seleccionarDatos($strQuery)) > 0){
 				// Verifico la ultima cota guardada de este libro
-				$strQuery = "SELECT MAX(nombre) AS nombre FROM cotas WHERE libro_id=".$_GET['libro_id'];
+				$strQuery = "SELECT MAX(nombre) AS nombre FROM ejemplares WHERE libro_id=".$_GET['libro_id'];
 				$resultados = $conexion->seleccionarDatos($strQuery);
 				if(count($resultados) > 0){
 					$ultimaCota = $resultados[0]['nombre'] + 1;
 					//Guardo la nueva cota
-					$strQuery = sprintf("INSERT INTO cotas VALUES (default, %d, %d, default)", $ultimaCota, $_GET['libro_id']);
+					$strQuery = sprintf("INSERT INTO ejemplares VALUES (default, %d, %d, default)", $ultimaCota, $_GET['libro_id']);
 					if($conexion->agregarRegistro($strQuery))
 						Sesion::setValor('success', $warnings['COTA_AGREGADA']);						
 					else

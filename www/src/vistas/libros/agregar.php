@@ -7,7 +7,8 @@ include_once HEADER_LY;
     <div class="col_4 column">
         <!-- things that need to be side-by-side go in "cells" -->
         <fieldset>
-            <div class="row"><?php echo $label_codigo . $codigo?></div>
+            <div class="row"><?php echo $label_isbn . $isbn?></div>
+            <div class="row"><?php echo $label_cota . $cota?></div>
             <div class="row"><?php echo $label_titulo . $titulo?></div>
             <div class="row"><?php echo $label_autor . $autor?></div>
             <div class="row"><?php echo $label_editorial . $editorial?></div>

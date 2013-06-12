@@ -6,9 +6,9 @@ require_once ZEBRA_FORM;
 
 $form = new Zebra_Form('frmBusqueda', 'get');
 
-// Agrego el codigo del libro al formulario
-$form->add('label', 'label_codigo', 'codigo', 'Código:');
-$obj = $form->add('text', 'codigo');
+// Agrego el isbn del libro al formulario
+$form->add('label', 'label_isbn', 'isbn', 'ISBN:');
+$obj = $form->add('text', 'isbn');
 $obj->set_rule(array(
     'alphanumeric' =>  array('error', '¡Sólo se permiten letras y números!')
 ));
@@ -37,26 +37,26 @@ if ($form->validate()) {
 
 		$strQuery = 'SELECT * FROM libros WHERE ';
 
-		if(isset($_GET['chk_codigo']) and !empty($_GET['chk_codigo']) and $_GET['chk_codigo'] == 'on')
-			if(isset($_GET['codigo']) and !empty($_GET['codigo']))
-				$strQuery .= "LOWER(codigo) LIKE LOWER('%".$_GET['codigo']."%')";
+		if(isset($_GET['chk_isbn']) and !empty($_GET['chk_isbn']) and $_GET['chk_isbn'] == 'on')
+			if(isset($_GET['isbn']) and !empty($_GET['isbn']))
+				$strQuery .= "LOWER(isbn) LIKE LOWER('%".$_GET['isbn']."%')";
 
 		if(isset($_GET['chk_autor']) and !empty($_GET['chk_autor']) and $_GET['chk_autor'] == 'on')
 			if(isset($_GET['autor']) and !empty($_GET['autor']))
-				if(isset($_GET['codigo']) and !empty($_GET['codigo']))
+				if(isset($_GET['isbn']) and !empty($_GET['isbn']))
 					$strQuery .= $condicion." LOWER(autor) LIKE LOWER('%".$_GET['autor']."%')";
 				else
 					$strQuery .= " LOWER(autor) LIKE LOWER('%".$_GET['autor']."%')";
 
 		if(isset($_GET['chk_titulo']) and !empty($_GET['chk_titulo']) and $_GET['chk_titulo'] == 'on')	
 			if(isset($_GET['titulo']) and !empty($_GET['titulo']))
-				if((isset($_GET['autor']) AND !empty($_GET['autor'])) OR (isset($_GET['codigo']) AND !empty($_GET['codigo'])))
+				if((isset($_GET['autor']) AND !empty($_GET['autor'])) OR (isset($_GET['isbn']) AND !empty($_GET['isbn'])))
 					$strQuery .= $condicion." LOWER(titulo) LIKE LOWER('%".$_GET['titulo']."%')";			
 				else
 					$strQuery .= " LOWER(titulo) LIKE LOWER('%".$_GET['titulo']."%')";			
 
 		if(isset($_GET['chk_editorial']) and !empty($_GET['chk_editorial']) and $_GET['chk_editorial'] == 'on')		
-			if((isset($_GET['editorial']) and !empty($_GET['editorial'])) OR (isset($_GET['autor']) AND !empty($_GET['autor'])) OR (isset($_GET['codigo']) AND !empty($_GET['codigo'])))	
+			if((isset($_GET['editorial']) and !empty($_GET['editorial'])) OR (isset($_GET['autor']) AND !empty($_GET['autor'])) OR (isset($_GET['isbn']) AND !empty($_GET['isbn'])))	
 				if(isset($_GET['titulo']) and !empty($_GET['titulo']))
 					$strQuery .= $condicion." LOWER(editorial) LIKE LOWER('%".$_GET['editorial']."%')";
 				else

@@ -28,7 +28,7 @@ if(!Sesion::existe('usuario')){
 
 	if ($form->validate()) {
 		require_once CONEXION;
-		$strQuery = "SELECT * FROM usuarios WHERE usuario='%s' AND password='%s'";
+		$strQuery = "SELECT u.*, tu.nombre AS tipo_usuario FROM usuarios u JOIN tipo_usuarios tu ON (u.tipo_usuario_id=tu.id) WHERE u.usuario='%s' AND u.password='%s'";
 		$strQuery = sprintf($strQuery, $_POST['usuario'], md5($_POST['password']));
 		$conexion = new Conexion($database);
 		$resultado = $conexion->seleccionarDatos($strQuery);

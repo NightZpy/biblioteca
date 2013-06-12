@@ -83,7 +83,8 @@
 			<?php endforeach; ?>
 		</tbody>
 	</table>
-	<?php endif; ?>	
+	<?php endif; ?>
+		
 </legend>
 <?php endif; ?>
 <?php include_once FOOTER_LY; ?>
