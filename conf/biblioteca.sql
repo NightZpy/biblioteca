@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.7
+-- version 4.0.0
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 10-06-2013 a las 16:47:51
--- Versión del servidor: 5.5.29
--- Versión de PHP: 5.4.12
+-- Tiempo de generación: 12-06-2013 a las 13:03:14
+-- Versión del servidor: 5.5.30
+-- Versión de PHP: 5.4.15
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -62,11 +62,11 @@ CREATE TABLE IF NOT EXISTS `ejemplares` (
 --
 
 INSERT INTO `ejemplares` (`id`, `nombre`, `libro_id`, `disponible`) VALUES
-(1, 1, 7, 0),
-(22, 2, 7, 0),
-(23, 3, 7, 0),
+(1, 1, 7, 1),
+(22, 2, 7, 1),
+(23, 3, 7, 1),
 (24, 4, 7, 0),
-(25, 5, 7, 0),
+(25, 5, 7, 1),
 (26, 6, 7, 1),
 (27, 7, 7, 1);
 
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `personas` (
 --
 
 INSERT INTO `personas` (`id`, `nombres`, `apellidos`, `cedula`, `nacionalidad`, `email`, `telefono`, `movil`, `direccion`, `procedencia`, `tipo_persona_id`) VALUES
-(1, 'Lenynnnnn', 'asdfasdf', '1234567', 'e', 'Lenyn@gmail.com', '123412', '123423412', 'dfasdf', 'asdfasdfasdfasdfasdfasd', 3),
+(1, 'Lenynnnnn', 'asdfasdf', '1234567', 'e', 'Lenyn@gmail.com', '123412', '123423412', 'dfasdf', 'asdfasdfasdfasdfasdfasd', 1),
 (2, 'pedro', 'ramirez', '19729157', 'v', 'r_ramirez@hotmail.com', '2147483647', '02767678678', 'barrio sucre', 'bolivariana', 2),
 (3, 'afsdfasdf', 'dfasdfasdf', '654321', 'v', 'Lenyn@gmail.com', '0', '(234)2342342', 'afsdfasdfasd', 'asdfasdfasdfasdfasdfasd', 1);
 
@@ -151,20 +151,21 @@ CREATE TABLE IF NOT EXISTS `prestamos` (
   KEY `usuario_id_2` (`usuario_id`),
   KEY `libro_id_2` (`ejemplar_id`),
   KEY `persona_id` (`persona_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `prestamos`
 --
 
 INSERT INTO `prestamos` (`id`, `persona_id`, `usuario_id`, `ejemplar_id`, `fecha_prestamo`, `fecha_entrega`, `fecha_entregado`) VALUES
-(1, 1, 1, 1, '2013-06-10', '2013-06-11', NULL),
-(2, 1, 1, 1, '2013-06-10', '2013-06-11', NULL),
-(3, 1, 1, 23, '2013-06-10', '2013-06-11', NULL),
-(4, 1, 1, 23, '2013-06-10', '2013-06-11', NULL),
-(5, 1, 1, 24, '2013-06-10', '2013-06-11', NULL),
-(6, 1, 1, 22, '2013-06-10', '2013-06-11', NULL),
-(7, 1, 1, 25, '2013-06-10', '2013-06-11', NULL);
+(1, 1, 1, 1, '2013-06-10', '2013-06-11', '2013-06-12'),
+(2, 1, 1, 1, '2013-06-10', '2013-06-11', '2013-06-12'),
+(3, 1, 1, 23, '2013-06-10', '2013-06-11', '2013-06-12'),
+(4, 1, 1, 23, '2013-06-10', '2013-06-11', '2013-06-12'),
+(5, 1, 1, 24, '2013-06-10', '2013-06-11', '2013-06-12'),
+(6, 1, 1, 22, '2013-06-10', '2013-06-11', '2013-06-12'),
+(7, 1, 1, 25, '2013-06-10', '2013-06-11', '2013-06-12'),
+(8, 1, 3, 24, '2013-06-12', '2013-06-14', NULL);
 
 -- --------------------------------------------------------
 
@@ -181,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `suspendidos` (
   PRIMARY KEY (`id`),
   KEY `libro_id` (`ejemplar_id`,`persona_id`),
   KEY `usuario_id` (`persona_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -202,8 +203,7 @@ CREATE TABLE IF NOT EXISTS `tipo_personas` (
 INSERT INTO `tipo_personas` (`id`, `nombre`) VALUES
 (1, 'Profesor'),
 (2, 'Alumno'),
-(3, 'Interno'),
-(4, 'Circulante');
+(3, 'Obrero');
 
 -- --------------------------------------------------------
 
