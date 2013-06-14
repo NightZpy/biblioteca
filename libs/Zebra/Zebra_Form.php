@@ -2499,13 +2499,13 @@ class Zebra_Form
                             if (isset($control->rules['alphabet']) || isset($control->rules['email']) || isset($control->rules['emails']))
 
                                 // use these characters in the random string
-                                $characters = 'abcdefghijklmnopqrstuvwxyz';
+                                $characters = 'abcdefghijklmnñopqrstuvwxyz';
 
                             // for controls having the "alphanumeric" rule set
                             if (isset($control->rules['alphanumeric']))
 
                                 // use these characters in the random string
-                                $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                                $characters = 'abcdefghijklmnñopqrstuvwxyz0123456789';
 
                             // for controls having the "digits" or "number" rule set
                             if (isset($control->rules['digits']) || isset($control->rules['number']))
